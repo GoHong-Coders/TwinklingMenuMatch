@@ -3,14 +3,34 @@ package menu.view;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
+
 public class MenuStart extends JFrame {
+    private JLabel startLb;
+    private JButton startBtn;
 
-    JLabel startLb = new JLabel((new ImageIcon("imgs/startScreen.png")), JLabel.CENTER);//가운데로 수평정렬
-    //버튼만들기
-    JButton startBtn = new JButton("");
-    MenuStart(){
+    MenuStart() {
+        startLb = new JLabel((new ImageIcon("imgs/startScreen.png")), JLabel.CENTER);
+        startBtn = new JButton("");
 
+        StartUI();
+    }
+
+    private void StartUI() {
+        setTitle("별메추 시작하기");
+        setBounds(0, 0, 1200, 700);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+
+        // 시작 버튼 초기화
+        StartButton();
+
+        // 사진 넣기
+        add(startLb, "Center");
+    }
+
+    private void StartButton() {
         // 로그인 버튼 위치, 크기 설정
         ImageIcon startBtnImg = new ImageIcon("imgs/startBtn.png");
         ImageIcon startBtnImg_enter = new ImageIcon("imgs/startBtn_enter.png");
@@ -27,8 +47,9 @@ public class MenuStart extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // 버튼 클릭 시 다른 클래스로 이동
-                new MenuView();
+//                new MenuTime();
             }
+
             @Override
             public void mouseEntered(MouseEvent e) {
                 startBtn.setIcon(startBtnImg_enter); // 마우스가 버튼 안으로 들어오면 이미지 변경
@@ -41,21 +62,8 @@ public class MenuStart extends JFrame {
         });
 
         add(startBtn);
-
-        //사진 넣기
-        add(startLb, "Center");
-
-        setTitle("별메추 시작하기"); // JFrame의 제목
-
-        setBounds(0, 0, 1200, 700); //x, y 좌표 위치 / 너비 높이 길이 설정
-        setLocationRelativeTo(null); // Frame의 위치를 화면 중앙으로 설정
-
-        setResizable(false); // 화면 크기 고정하는 작업
-        setDefaultCloseOperation(EXIT_ON_CLOSE); //무조건 있어야함 끝내는것
-
-        setVisible(true); // JFrame을 화면에 표시
-
     }
+
     public static void main(String[] args){
         MenuStart e = new MenuStart();
     }
