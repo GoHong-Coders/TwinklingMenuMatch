@@ -62,7 +62,7 @@ public class MenuTime extends JFrame {
     // 시계 이미지를 추가하는 함수
     private void addClockImage() {
         tClockLb = new JLabel();
-        ImageIcon tClockLb_Img = new ImageIcon("imgs/clock.png");
+        ImageIcon tClockLb_Img = new ImageIcon("imgs/tClock.png");
         tClockLb.setIcon(tClockLb_Img);
         tClockLb.setBounds(478, 46, 243, 122);
         timePl.add(tClockLb);
