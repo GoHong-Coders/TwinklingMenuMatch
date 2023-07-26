@@ -29,6 +29,9 @@ public class MenuTime extends JFrame {
         // 시계 이미지 추가
         addClockImage();
 
+        // 아침, 점심, 저녁 버튼 추가
+        addMealButtons();
+
         this.add(timePl);
         this.setVisible(true);
     }
@@ -65,6 +68,59 @@ public class MenuTime extends JFrame {
         timePl.add(tClockLb);
     }
 
+    // 아침, 점심, 저녁 버튼을 선택하는 함수
+    private void addMealButtons() {
+        tMorning_btn = new JButton("");
+        tLunch_btn = new JButton("");
+        tDinner_btn = new JButton("");
+
+        tMorning_btn.setBounds(110, 293, 224, 226);
+        tLunch_btn.setBounds(488, 293, 224, 226);
+        tDinner_btn.setBounds(865, 293, 224, 226);
+
+        addImageButton(tMorning_btn, "imgs/tMorning_btn.png", "imgs/tMorning_btn_enter.png", "Morning");
+        addImageButton(tLunch_btn, "imgs/tLunch_btn.png", "imgs/tLunch_btn_enter.png", "Lunch");
+        addImageButton(tDinner_btn, "imgs/tDinner_btn.png", "imgs/tDinner_btn_enter.png", "Dinner");
+
+        timePl.add(tMorning_btn);
+        timePl.add(tLunch_btn);
+        timePl.add(tDinner_btn);
+    }
+
+    // 마우스 이벤트 함수
+    private void addImageButton(JButton button, String normalImage, String enterImage, String className) {
+        ImageIcon normalIcon = new ImageIcon(normalImage);
+        ImageIcon enterIcon = new ImageIcon(enterImage);
+
+        button.setIcon(normalIcon);
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setContentAreaFilled(false);
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // 버튼 클릭 시 해당 클래스로 이동
+                if ("Morning".equals(className)) {
+//                    new MenuMorning(); // 아침 메뉴 화면으로 이동
+                } else if ("Lunch".equals(className)) {
+//                    new MenuLunch(); // 아침 메뉴 화면으로  이동
+                } else if ("Dinner".equals(className)) {
+//                    new MenuDinner(); // 저녁 메뉴 화면으로 이동
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setIcon(enterIcon);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setIcon(normalIcon);
+            }
+        });
+    }
     public static void main(String[] args){
         MenuTime e = new MenuTime();
     }
