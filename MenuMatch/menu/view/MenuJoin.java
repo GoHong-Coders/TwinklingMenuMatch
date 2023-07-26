@@ -6,197 +6,167 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.border.Border;
 
 public class MenuJoin extends JFrame {
-    private JPanel panel = new JPanel(null);
-
-    private JTextField idField;
-    private JTextField usernameField;
-    private JPasswordField passwordField;
-    private JPasswordField Retry_passwordField;
+    // 패널 만들기
+    private JPanel panel;
 
 
+    // 텍스트 필드 만들기
+    private JTextField Join_Id_tf;
+    private JTextField Join_name_tf;
+    private JPasswordField Join_pass_tf;
+    private JPasswordField Join_retry_tf;
 
     //버튼만들기
-    JButton joinBtn = new JButton("");
-    JButton cancelBtn = new JButton("");
-    MenuJoin(){
+    private JButton joinBtn;
+    private JButton cancelBtn;
 
+    MenuJoin() {
+        panel = new JPanel(null);
+
+        Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
+        Border loweredBevelBorder = BorderFactory.createLoweredBevelBorder();
+        Border Border = BorderFactory.createCompoundBorder(raisedBevelBorder,loweredBevelBorder);
 
         //        <------------------------------------------------------> 아이디, 회원가입 필드
 
-        // 이름 입력 필드
-        idField = new JTextField(15);
-        idField.setText("이름을 입력해주세요");
-        idField.setForeground(Color.GRAY);
-        idField.setBounds(234, 137, 312, 60); // 컴포넌트의 위치와 크기 설정
-        panel.add(idField);
 
-        // FocusListener를 사용하여 텍스트 필드의 힌트 텍스트 처리
-        idField.addFocusListener(new FocusListener() {
+        // 이름 입력 필드
+        Join_name_tf = new JTextField(15);
+        Join_name_tf.setText("이름을 입력해주세요");
+        Join_name_tf.setForeground(new Color(168, 168, 168));
+        Join_name_tf.setBounds(234, 137, 312, 60); // 컴포넌트의 위치와 크기 설정
+        Join_name_tf.setBorder(Border);
+        Join_name_tf.setFont(new Font("Gowun Batang", Font.PLAIN, 14)); // 폰트 설정
+        panel.add(Join_name_tf);
+
+        Join_name_tf.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (idField.getText().equals("이름을 입력해주세요")) {
-                    idField.setText("");
-                    idField.setForeground(Color.BLACK);
+                if (Join_name_tf.getText().equals("이름을 입력해주세요")) {
+                    Join_name_tf.setText("");
+                    Join_name_tf.setForeground(new Color(44, 44, 44));
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (idField.getText().isEmpty()) {
-                    idField.setText("이름을 입력해주세요");
-                    idField.setForeground(Color.GRAY);
+                if (Join_name_tf.getText().isEmpty()) {
+                    Join_name_tf.setText("이름을 입력해주세요");
+                    Join_name_tf.setForeground(new Color(168, 168, 168));
                 }
             }
         });
+
+
 
         // 아이디 입력 필드
-        usernameField = new JTextField(15);
-        usernameField.setText("아이디를 입력해주세요");
-        usernameField.setForeground(Color.GRAY);
-        usernameField.setBounds(234, 234, 312, 60); // 컴포넌트의 위치와 크기 설정
-        panel.add(usernameField);
+        Join_Id_tf = new JTextField(15);
+        Join_Id_tf.setText("아이디를 입력해주세요");
+        Join_Id_tf.setForeground(new Color(168, 168, 168));
+        Join_Id_tf.setBounds(234, 234, 312, 60); // 컴포넌트의 위치와 크기 설정
+        Join_Id_tf.setBorder(Border);
+        Join_Id_tf.setFont(new Font("Gowun Batang", Font.PLAIN, 14)); // 폰트 설정
+        panel.add(Join_Id_tf);
 
-        // FocusListener를 사용하여 텍스트 필드의 힌트 텍스트 처리
-        usernameField.addFocusListener(new FocusListener() {
+        Join_Id_tf.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (usernameField.getText().equals("아이디를 입력해주세요")) {
-                    usernameField.setText("");
-                    usernameField.setForeground(Color.BLACK);
+                if (Join_Id_tf.getText().equals("아이디를 입력해주세요")) {
+                    Join_Id_tf.setText("");
+                    Join_Id_tf.setForeground(new Color(44, 44, 44));
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (usernameField.getText().isEmpty()) {
-                    usernameField.setText("아이디를 입력해주세요");
-                    usernameField.setForeground(Color.GRAY);
+                if (Join_Id_tf.getText().isEmpty()) {
+                    Join_Id_tf.setText("아이디를 입력해주세요");
+                    Join_Id_tf.setForeground(new Color(168, 168, 168));
                 }
             }
         });
 
-        // 비밀번호 입력 필드
-        passwordField = new JPasswordField(15);
-        passwordField.setEchoChar((char) 0);
-        passwordField.setText("비밀번호를 입력해주세요");
-        passwordField.setForeground(Color.GRAY);
-        passwordField.setBounds(234, 331, 312, 60);
-        panel.add(passwordField);
 
-        // FocusListener를 사용하여 텍스트 필드의 힌트 텍스트 처리
-        passwordField.addFocusListener(new FocusListener() {
+        // 비밀번호 입력 필드
+        Join_pass_tf = new JPasswordField(15);
+        Join_pass_tf.setEchoChar((char) 0);
+        Join_pass_tf.setText("비밀번호를 입력해주세요");
+        Join_pass_tf.setBounds(234, 331, 312, 60);
+        Join_pass_tf.setForeground(new Color(168, 168, 168));
+        Join_pass_tf.setBorder(Border);
+        Join_pass_tf.setFont(new Font("Gowun Batang", Font.PLAIN, 14)); // 폰트 설정
+        panel.add(Join_pass_tf);
+
+        // 비밀번호 입력 필드에 입력하면 *로 입력하게 만들어주는 함수
+        Join_pass_tf.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (passwordField.getText().equals("비밀번호를 입력해주세요")) {
-                    passwordField.setText("");
-                    passwordField.setForeground(Color.BLACK);
+                // 입력 필드에 포커스를 받으면 힌트 텍스트가 비워짐
+                String input = new String(Join_pass_tf.getPassword());
+                if (input.equals("비밀번호를 입력해주세요")) {
+                    Join_pass_tf.setText("");
+                    Join_pass_tf.setForeground(new Color(44, 44, 44));
+                    Join_pass_tf.setEchoChar('*'); // '*'로 마스킹 설정
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (passwordField.getText().isEmpty()) {
-                    passwordField.setText("비밀번호를 입력해주세요");
-                    passwordField.setForeground(Color.GRAY);
+                // 입력 필드에서 포커스를 잃으면 힌트 텍스트가 나타남
+                String input = new String(Join_pass_tf.getPassword());
+                if (input.isEmpty()) {
+                    Join_pass_tf.setText("비밀번호를 입력해주세요");
+                    Join_pass_tf.setForeground(new Color(168, 168, 168));
+                    Join_pass_tf.setEchoChar((char) 0); // 마스킹 없음
                 }
             }
         });
 
         // 비밀번호 확인 입력 필드
-        Retry_passwordField = new JPasswordField(15);
-        Retry_passwordField.setEchoChar((char) 0);
-        Retry_passwordField.setText("비밀번호를 확인해주세요");
-        Retry_passwordField.setForeground(Color.GRAY);
-        Retry_passwordField.setBounds(234, 428, 312, 60);
-        panel.add(Retry_passwordField);
+        Join_retry_tf = new JPasswordField(15);
+        Join_retry_tf.setEchoChar((char) 0);
+        Join_retry_tf.setText("비밀번호를 확인해주세요");
+        Join_retry_tf.setBounds(234, 428, 312, 60);
+        Join_retry_tf.setForeground(new Color(168, 168, 168));
+        Join_retry_tf.setBorder(Border);
+        Join_retry_tf.setFont(new Font("Gowun Batang", Font.PLAIN, 14)); // 폰트 설정
+        panel.add(Join_retry_tf);
 
-        // FocusListener를 사용하여 텍스트 필드의 힌트 텍스트 처리
-        Retry_passwordField.addFocusListener(new FocusListener() {
+        // 비밀번호 입력 필드에 입력하면 *로 입력하게 만들어주는 함수
+        Join_retry_tf.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (Retry_passwordField.getText().equals("비밀번호를 확인해주세요")) {
-                    Retry_passwordField.setText("");
-                    Retry_passwordField.setForeground(Color.BLACK);
+                // 입력 필드에 포커스를 받으면 힌트 텍스트가 비워짐
+                String input = new String(Join_retry_tf.getPassword());
+                if (input.equals("비밀번호를 확인해주세요")) {
+                    Join_retry_tf.setText("");
+                    Join_retry_tf.setForeground(new Color(44, 44, 44));
+                    Join_retry_tf.setEchoChar('*'); // '*'로 마스킹 설정
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (Retry_passwordField.getText().isEmpty()) {
-                    Retry_passwordField.setText("비밀번호를 확인해주세요");
-                    Retry_passwordField.setForeground(Color.GRAY);
+                // 입력 필드에서 포커스를 잃으면 힌트 텍스트가 나타남
+                String input = new String(Join_retry_tf.getPassword());
+                if (input.isEmpty()) {
+                    Join_retry_tf.setText("비밀번호를 확인해주세요");
+                    Join_retry_tf.setForeground(new Color(168, 168, 168));
+                    Join_retry_tf.setEchoChar((char) 0); // 마스킹 없음
                 }
             }
         });
 
 
+        // 로그인 버튼
+        joinBtn = createButton("imgs/join_joinBtn.png", "imgs/join_joinBtn_enter.png", 93, 542, 170, 60);
+        // 취소 버튼
+        cancelBtn = createButton("imgs/join_cancelBtn.png", "imgs/join_cancelBtn_enter.png", 318, 542, 170, 60);
 
-//        <------------------------------------------------------> 로그인, 회원가입 버튼
-        // 로그인 버튼 위치, 크기 설정
-        ImageIcon joinBtnImg = new ImageIcon("imgs/join_joinBtn.png");
-        ImageIcon joinBtnImg_enter = new ImageIcon("imgs/join_joinBtn_enter.png");
-        joinBtn.setIcon(joinBtnImg);
-        joinBtn.setBounds(93, 542, 170, 60); // 크기 위치 설정
-        joinBtn.setBorderPainted(false); // 테두리 외곽선 없애기
-        joinBtn.setFocusPainted(false); // focus되었을 때 생기는 테두리 없애기
-        joinBtn.setContentAreaFilled(false); // 내용 영역 없애기
-
-        // MouseListener를 이용하여 버튼의 Mouse 이벤트 처리
-        joinBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // 버튼 클릭 시 다른 클래스로 이동
-//                new MenuTime();
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                joinBtn.setIcon(joinBtnImg_enter); // 마우스가 버튼 안으로 들어오면 이미지 변경
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                joinBtn.setIcon(joinBtnImg); // 마우스가 버튼 밖으로 나가면 이미지 원래대로 복원
-            }
-        });
-
-        panel.add(joinBtn);
-
-        ImageIcon joinCancelImg = new ImageIcon("imgs/join_cancelBtn.png");
-        ImageIcon joinCancelImg_enter = new ImageIcon("imgs/join_cancelBtn_enter.png");
-        cancelBtn.setIcon(joinCancelImg);
-        cancelBtn.setBounds(318, 542, 170, 60); // 크기 위치 설정
-        cancelBtn.setBorderPainted(false); // 테두리 외곽선 없애기
-        cancelBtn.setFocusPainted(false); // focus되었을 때 생기는 테두리 없애기
-        cancelBtn.setContentAreaFilled(false); // 내용 영역 없애기
-
-        // MouseListener를 이용하여 버튼의 Mouse 이벤트 처리
-        cancelBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // 버튼 클릭 시 다른 클래스로 이동
-//                new MenuTime();
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                cancelBtn.setIcon(joinCancelImg_enter); // 마우스가 버튼 안으로 들어오면 이미지 변경
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                cancelBtn.setIcon(joinCancelImg); // 마우스가 버튼 밖으로 나가면 이미지 원래대로 복원
-            }
-        });
-
-        panel.add(cancelBtn);
-
-
-
-//        <------------------------------------------------------> 배경 사진 넣기
-
+        // 배경 사진 넣기
         JLabel backgroud_Label = new JLabel("");
         ImageIcon JoinScreen_Img = new ImageIcon(this.getClass().getResource("/joinScreen.png"));
         backgroud_Label.setIcon(JoinScreen_Img);
@@ -206,6 +176,16 @@ public class MenuJoin extends JFrame {
         panel.setBounds(0, 0, 580, 670);
 
         add(panel);
+
+
+        // JFrame 설정
+        setTitle("회원가입 하기");
+        setBounds(0, 0, 580, 670);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+
         //        <------------------------------------------------------> JFrame
         setTitle("회원가입 하기"); // JFrame의 제목
 
@@ -219,7 +199,39 @@ public class MenuJoin extends JFrame {
 
 
     }
-    public static void main(String[] args){
+
+    private JButton createButton(String imgPath, String imgPathEnter, int x, int y, int width, int height) {
+        JButton button = new JButton("");
+        ImageIcon btnImg = new ImageIcon(imgPath);
+        ImageIcon btnImgEnter = new ImageIcon(imgPathEnter);
+        button.setIcon(btnImg);
+        button.setBounds(x, y, width, height);
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setContentAreaFilled(false);
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // 버튼 클릭 시 동작 코드 작성
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setIcon(btnImgEnter);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setIcon(btnImg);
+            }
+        });
+
+        panel.add(button);
+        return button;
+    }
+
+    public static void main(String[] args) {
         MenuJoin e = new MenuJoin();
     }
 
