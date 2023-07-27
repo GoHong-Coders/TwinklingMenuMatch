@@ -11,6 +11,7 @@ public class MenuLogin extends JFrame {
     private JPasswordField Login_pass_tf;
     private JButton loginBtn;
     private JButton joinBtn;
+    private Font font = new Font("Gowun Batang", Font.PLAIN, 14); // 폰트 설정
 
     public MenuLogin() {
         LoginUI();
@@ -34,7 +35,7 @@ public class MenuLogin extends JFrame {
         Login_Id_tf.setBounds(192, 155, 312, 60);
         Login_Id_tf.setForeground(new Color(168, 168, 168));
         Login_Id_tf.setBorder(Border);
-        Login_Id_tf.setFont(new Font("Gowun Batang", Font.PLAIN, 14)); // 폰트 설정
+        Login_Id_tf.setFont(font); // 폰트 설정
 
         Login_Id_tf.addFocusListener(new FocusListener() {
             @Override
@@ -63,7 +64,7 @@ public class MenuLogin extends JFrame {
         Login_pass_tf.setBounds(192, 236, 312, 60);
         Login_pass_tf.setForeground(new Color(168, 168, 168));
         Login_pass_tf.setBorder(Border);
-        Login_pass_tf.setFont(new Font("Gowun Batang", Font.PLAIN, 14)); // 폰트 설정
+        Login_pass_tf.setFont(font); // 폰트 설정
         panel.add(Login_pass_tf);
 
         // 비밀번호 입력 필드에 입력하면 *로 입력하게 만들어주는 함수
