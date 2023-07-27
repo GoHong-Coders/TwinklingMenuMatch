@@ -23,6 +23,8 @@ public class MenuJoin extends JFrame {
     private JButton joinBtn;
     private JButton cancelBtn;
 
+    private Font font = new Font("Gowun Batang", Font.PLAIN, 14); // 폰트 설정
+
     MenuJoin() {
         panel = new JPanel(null);
 
@@ -39,7 +41,7 @@ public class MenuJoin extends JFrame {
         Join_name_tf.setForeground(new Color(168, 168, 168));
         Join_name_tf.setBounds(234, 137, 312, 60); // 컴포넌트의 위치와 크기 설정
         Join_name_tf.setBorder(Border);
-        Join_name_tf.setFont(new Font("Gowun Batang", Font.PLAIN, 14)); // 폰트 설정
+        Join_name_tf.setFont(font); // 폰트 설정
         panel.add(Join_name_tf);
 
         Join_name_tf.addFocusListener(new FocusListener() {
@@ -68,7 +70,7 @@ public class MenuJoin extends JFrame {
         Join_Id_tf.setForeground(new Color(168, 168, 168));
         Join_Id_tf.setBounds(234, 234, 312, 60); // 컴포넌트의 위치와 크기 설정
         Join_Id_tf.setBorder(Border);
-        Join_Id_tf.setFont(new Font("Gowun Batang", Font.PLAIN, 14)); // 폰트 설정
+        Join_Id_tf.setFont(font); // 폰트 설정
         panel.add(Join_Id_tf);
 
         Join_Id_tf.addFocusListener(new FocusListener() {
@@ -97,7 +99,7 @@ public class MenuJoin extends JFrame {
         Join_pass_tf.setBounds(234, 331, 312, 60);
         Join_pass_tf.setForeground(new Color(168, 168, 168));
         Join_pass_tf.setBorder(Border);
-        Join_pass_tf.setFont(new Font("Gowun Batang", Font.PLAIN, 14)); // 폰트 설정
+        Join_pass_tf.setFont(font); // 폰트 설정
         panel.add(Join_pass_tf);
 
         // 비밀번호 입력 필드에 입력하면 *로 입력하게 만들어주는 함수
@@ -132,7 +134,7 @@ public class MenuJoin extends JFrame {
         Join_retry_tf.setBounds(234, 428, 312, 60);
         Join_retry_tf.setForeground(new Color(168, 168, 168));
         Join_retry_tf.setBorder(Border);
-        Join_retry_tf.setFont(new Font("Gowun Batang", Font.PLAIN, 14)); // 폰트 설정
+        Join_retry_tf.setFont(font); // 폰트 설정
         panel.add(Join_retry_tf);
 
         // 비밀번호 입력 필드에 입력하면 *로 입력하게 만들어주는 함수
