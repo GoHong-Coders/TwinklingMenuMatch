@@ -53,10 +53,12 @@ public class MenuTime extends JFrame {
 
     // 현재 시각을 나타내는 함수
     private void updateTimeLabel() {
+        Font font = new Font("digital-7", Font.PLAIN, 55);//디지털 font 설정
         LocalDateTime currentTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         String formattedTime = currentTime.format(formatter);
         tTimeLb.setText(formattedTime);
+        tTimeLb.setFont(font); //
     }
 
     // 시계 이미지를 추가하는 함수
