@@ -34,6 +34,7 @@ public class MenuView extends JFrame{
     // 버튼
     JButton homeBtn = new JButton("");
     JButton recordBtn = new JButton("");
+    JButton randomBtn = new JButton("");
     JButton morningBtn = new JButton("");
     JButton lunchBtn = new JButton("");
     JButton dinnerBtn = new JButton("");
@@ -42,6 +43,7 @@ public class MenuView extends JFrame{
     // 이미지 삽입
     ImageIcon homeBtn_img = new ImageIcon("imgs/Home.png");
     ImageIcon recordBtn_img = new ImageIcon("imgs/Record.png");
+    ImageIcon randomBtn_img = new ImageIcon("imgs/Random.png");
     ImageIcon morningBtn_img = new ImageIcon("imgs/morning_line.png");
     ImageIcon lunchBtn_img = new ImageIcon("imgs/lunch_line.png");
     ImageIcon dinnerBtn_img = new ImageIcon("imgs/dinner_line.png");
@@ -67,6 +69,7 @@ public class MenuView extends JFrame{
         // 버튼 추가
         HomeBtn();
         RecordBtn();
+        RandomBtn();
         MorningBtn();
         LunchBtn();
         DinnerBtn();
@@ -120,11 +123,19 @@ public class MenuView extends JFrame{
     }
 
     public void RecordBtn(){ // 기록 버튼
-        recordBtn.setBounds(1107, 23, 70, 70);
+        recordBtn.setBounds(115, 23, 70, 70);
         recordBtn.setBorderPainted(false);
         recordBtn.setIcon(recordBtn_img);
         recordBtn.setContentAreaFilled(false);
         tapPn.add(recordBtn);
+    }
+
+    public void RandomBtn(){ // 랜덤 메뉴 버튼
+        randomBtn.setBounds(1080, 20, 87, 87);
+        randomBtn.setBorderPainted(false);
+        randomBtn.setIcon(randomBtn_img);
+        randomBtn.setContentAreaFilled(false);
+        tapPn.add(randomBtn);
     }
 
     public void MorningBtn(){ // 아침 버튼
