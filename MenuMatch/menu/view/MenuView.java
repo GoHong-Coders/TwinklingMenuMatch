@@ -59,7 +59,9 @@ public class MenuView extends JFrame{
 
     // 이미지 삽입
     ImageIcon homeBtn_img = new ImageIcon("imgs/Home.png");
+    ImageIcon homeBtnClick_img = new ImageIcon("imgs/Home_clicked.png");
     ImageIcon recordBtn_img = new ImageIcon("imgs/Record.png");
+    ImageIcon recordBtnClick_img = new ImageIcon("imgs/Record_clicked.png");
     ImageIcon randomBtn_img = new ImageIcon("imgs/Random.png");
     ImageIcon morningBtn_img = new ImageIcon("imgs/morning_line.png");
     ImageIcon lunchBtn_img = new ImageIcon("imgs/lunch_line.png");
@@ -69,7 +71,9 @@ public class MenuView extends JFrame{
     ImageIcon dinnerBtnClick_img = new ImageIcon("imgs/dinner.png");
     ImageIcon menuXBtn_img = new ImageIcon("imgs/x.png");
     ImageIcon menuCloseBtn_img = new ImageIcon("imgs/close.png");
+    ImageIcon menuCloseBtnClick_img = new ImageIcon("imgs/close_clicked.png");
     ImageIcon menuSelectBtn_img = new ImageIcon("imgs/select.png");
+    ImageIcon menuSelectBtnClick_img = new ImageIcon("imgs/select_clicked.png");
     ImageIcon menu_img = new ImageIcon("imgs/menu.png");
 
     JScrollPane scrollPane = new JScrollPane(menuPn);
@@ -102,6 +106,9 @@ public class MenuView extends JFrame{
         // 버튼 배열 추가
         addButtonsToPanel();
 
+        // 버튼 이미지 추가
+        addImageIcons();
+
         // 스크롤 정책 설정
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setPreferredSize(new Dimension(500, 500)); // 스크롤 뷰포트의 크기 설정
@@ -125,7 +132,6 @@ public class MenuView extends JFrame{
             for (int col = 0; col < 4; col++) {
                 buttons[row][col] = new JButton("" );
                 buttons[row][col].setPreferredSize(new Dimension(100, 50)); // 버튼 크기 설정 (가로 100, 세로 50)
-
                 buttons[row][col].setIcon(menu_img);
                 buttons[row][col].setBorderPainted(false);
                 buttons[row][col].setContentAreaFilled(false);
@@ -135,9 +141,8 @@ public class MenuView extends JFrame{
 
     public void addButtonsToPanel() { // 4행 4열 버튼 패널에 추가
         menuPn.setLayout(new GridLayout(4, 4, -26, 0)); // 10픽셀의 간격으로 설정
-        int row, col;
-        for (row = 0; row < 4; row++) {
-            for (col = 0; col < 4; col++) {
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 4; col++) {
                 buttons[row][col].addMouseListener(new MouseAdapter() { // 마우스 이벤트
                     @Override public void mousePressed(MouseEvent e) { // 마우스 클릭했을때
                         menuF.setVisible(true);
@@ -162,9 +167,35 @@ public class MenuView extends JFrame{
         }
     }
 
+    public void addImageIcons(){ // 버튼 배열에 이미지 배열 삽입
+        ImageIcon[] aImages = new ImageIcon[16];
+        for (int i = 1; i <= 16; i++) {
+            String imagePath = "imgs/Morning_menu/morning_menu" + i + ".png";
+            ImageIcon icon = new ImageIcon(imagePath);
+            aImages[i - 1] = icon;
+        }
+
+        // 버튼에 이미지 삽입
+        int index = 0;
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 4; col++) {
+                buttons[row][col].setIcon(aImages[index]);
+                index++;
+                buttons[row][col].addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        // ... (Previous code)
+                    }
+                });
+                menuPn.add(buttons[row][col]);
+            }
+        }
+    }
+
     public void HomeBtn(){ // 홈 버튼
         homeBtn.setBounds(23, 23, 70, 70);
         homeBtn.setBorderPainted(false);
+        homeBtn.setRolloverIcon(homeBtnClick_img);
         homeBtn.setIcon(homeBtn_img);
         homeBtn.setContentAreaFilled(false);
         tapPn.add(homeBtn);
@@ -173,6 +204,7 @@ public class MenuView extends JFrame{
     public void RecordBtn(){ // 기록 버튼
         recordBtn.setBounds(115, 23, 70, 70);
         recordBtn.setBorderPainted(false);
+        recordBtn.setRolloverIcon(recordBtnClick_img);
         recordBtn.setIcon(recordBtn_img);
         recordBtn.setContentAreaFilled(false);
         tapPn.add(recordBtn);
@@ -230,6 +262,7 @@ public class MenuView extends JFrame{
     public void MenuCloseBtn(){ // 메뉴 설명 닫기 버튼
         menuCloseBtn.setBounds(140, 520, 151, 69);
         menuCloseBtn.setBorderPainted(false);
+        menuCloseBtn.setRolloverIcon(menuCloseBtnClick_img);
         menuCloseBtn.setIcon(menuCloseBtn_img);
         menuCloseBtn.setContentAreaFilled(false);
         menu_descriptionPn.add(menuCloseBtn);
@@ -244,6 +277,7 @@ public class MenuView extends JFrame{
     public void MenuSelectBtn(){ // 메뉴 선택 버튼
         menuSelectBtn.setBounds(373, 520, 151, 69);
         menuSelectBtn.setBorderPainted(false);
+        menuSelectBtn.setRolloverIcon(menuSelectBtnClick_img);
         menuSelectBtn.setIcon(menuSelectBtn_img);
         menuSelectBtn.setContentAreaFilled(false);
         menu_descriptionPn.add(menuSelectBtn);
