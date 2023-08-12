@@ -198,6 +198,14 @@ public class MenuDinner extends JFrame{
         morningBtn.setIcon(morningBtn_img);
         morningBtn.setContentAreaFilled(false);
         tapPn.add(morningBtn);
+
+        morningBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lunchBtn.setIcon(lunchBtn_img);
+                dinnerBtn.setIcon(dinnerBtn_img);
+            }
+        });
     }
 
     public void LunchBtn(){ // 점심 버튼
@@ -207,6 +215,14 @@ public class MenuDinner extends JFrame{
         lunchBtn.setIcon(lunchBtn_img);
         lunchBtn.setContentAreaFilled(false);
         tapPn.add(lunchBtn);
+
+        lunchBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                morningBtn.setIcon(morningBtn_img);
+                dinnerBtn.setIcon(dinnerBtn_img);
+            }
+        });
     }
 
     public void DinnerBtn() { // 저녁 버튼
@@ -220,6 +236,8 @@ public class MenuDinner extends JFrame{
         dinnerBtn.addMouseListener(new MouseAdapter() { // 마우스 이벤트
             @Override public void mousePressed(MouseEvent e) { // 마우스 클릭했을때
                 dinnerBtn.setIcon(dinnerBtnClick_img);
+                morningBtn.setIcon(morningBtn_img);
+                lunchBtn.setIcon(lunchBtn_img);
 
                 // 버튼 이미지 생성
                 ImageIcon[] Dinner_menu_Images = new ImageIcon[16];

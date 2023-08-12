@@ -199,6 +199,14 @@ public class MenuLunch extends JFrame{
         morningBtn.setIcon(morningBtn_img);
         morningBtn.setContentAreaFilled(false);
         tapPn.add(morningBtn);
+
+        morningBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lunchBtn.setIcon(lunchBtn_img);
+                dinnerBtn.setIcon(dinnerBtn_img);
+            }
+        });
     }
 
     public void LunchBtn(){ // 점심 버튼
@@ -212,6 +220,8 @@ public class MenuLunch extends JFrame{
         lunchBtn.addMouseListener(new MouseAdapter() { // 마우스 이벤트
             @Override public void mousePressed(MouseEvent e) { // 마우스 클릭했을때
                 lunchBtn.setIcon(lunchBtnClick_img);
+                morningBtn.setIcon(morningBtn_img);
+                dinnerBtn.setIcon(dinnerBtn_img);
 
                 // 버튼 이미지 생성
                 ImageIcon[] Lunch_menu_Images = new ImageIcon[16];
@@ -253,6 +263,14 @@ public class MenuLunch extends JFrame{
         dinnerBtn.setIcon(dinnerBtn_img);
         dinnerBtn.setContentAreaFilled(false);
         tapPn.add(dinnerBtn);
+
+        dinnerBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                morningBtn.setIcon(morningBtn_img);
+                lunchBtn.setIcon(lunchBtn_img);
+            }
+        });
     }
 
     public void MenuXBtn(){ // 메뉴 설명 X 버튼 (닫기 버튼과 같음)
