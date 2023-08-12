@@ -106,9 +106,6 @@ public class MenuView extends JFrame{
         // 버튼 배열 추가
         addButtonsToPanel();
 
-        // 버튼 이미지 추가
-        addImageIcons();
-
         // 스크롤 정책 설정
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setPreferredSize(new Dimension(500, 500)); // 스크롤 뷰포트의 크기 설정
@@ -160,31 +157,6 @@ public class MenuView extends JFrame{
                                 menuF.dispose();
                             }
                         });
-                    }
-                });
-                menuPn.add(buttons[row][col]);
-            }
-        }
-    }
-
-    public void addImageIcons(){ // 버튼 배열에 이미지 배열 삽입
-        ImageIcon[] aImages = new ImageIcon[16];
-        for (int i = 1; i <= 16; i++) {
-            String imagePath = "imgs/Morning_menu/morning_menu" + i + ".png";
-            ImageIcon icon = new ImageIcon(imagePath);
-            aImages[i - 1] = icon;
-        }
-
-        // 버튼에 이미지 삽입
-        int index = 0;
-        for (int row = 0; row < 4; row++) {
-            for (int col = 0; col < 4; col++) {
-                buttons[row][col].setIcon(aImages[index]);
-                index++;
-                buttons[row][col].addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mousePressed(MouseEvent e) {
-                        // ... (Previous code)
                     }
                 });
                 menuPn.add(buttons[row][col]);
