@@ -205,23 +205,23 @@ public class MenuMorning extends JFrame{
                 morningBtn.setIcon(morningBtnClick_img);
 
                 // 버튼 이미지 생성
-                ImageIcon[] aImages = new ImageIcon[16];
-                ImageIcon[] bImages = new ImageIcon[16];
+                ImageIcon[] Morning_menu_Images = new ImageIcon[16];
+                ImageIcon[] Morning_menu_dark_Images = new ImageIcon[16];
                 for (int i = 1; i <= 16; i++) {
                     String imagePath_1 = "imgs/Morning_menu/morning_menu" + i + ".png";
                     String imagePath_2 = "imgs/Morning_menu/morning_menu_dark_" + i + ".png";
                     ImageIcon icon_1 = new ImageIcon(imagePath_1);
                     ImageIcon icon_2 = new ImageIcon(imagePath_2);
-                    aImages[i - 1] = icon_1;
-                    bImages[i - 1] = icon_2;
+                    Morning_menu_Images[i - 1] = icon_1;
+                    Morning_menu_dark_Images[i - 1] = icon_2;
                 }
 
                 // 버튼에 이미지 삽입
                 int index = 0;
                 for (int row = 0; row < 4; row++) {
                     for (int col = 0; col < 4; col++) {
-                        buttons[row][col].setIcon(aImages[index]);
-                        buttons[row][col].setRolloverIcon(bImages[index]);
+                        buttons[row][col].setIcon(Morning_menu_Images[index]);
+                        buttons[row][col].setRolloverIcon(Morning_menu_dark_Images[index]);
                         index++;
                         buttons[row][col].addMouseListener(new MouseAdapter() {
                             @Override

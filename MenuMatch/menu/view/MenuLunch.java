@@ -214,15 +214,15 @@ public class MenuLunch extends JFrame{
                 lunchBtn.setIcon(lunchBtnClick_img);
 
                 // 버튼 이미지 생성
-                ImageIcon[] aImages = new ImageIcon[16];
-                ImageIcon[] bImages = new ImageIcon[16];
+                ImageIcon[] Lunch_menu_Images = new ImageIcon[16];
+                ImageIcon[] Lunch_menu_dark_Images = new ImageIcon[16];
                 for (int i = 1; i <= 16; i++) {
                     String imagePath_1 = "imgs/Lunch_menu/lunch_menu" + i + ".png";
                     String imagePath_2 = "imgs/Lunch_menu/lunch_menu_dark_" + i + ".png";
                     ImageIcon icon_1 = new ImageIcon(imagePath_1);
                     ImageIcon icon_2 = new ImageIcon(imagePath_2);
-                    aImages[i - 1] = icon_1;
-                    bImages[i - 1] = icon_2;
+                    Lunch_menu_Images[i - 1] = icon_1;
+                    Lunch_menu_dark_Images[i - 1] = icon_2;
                 }
 
 
@@ -230,8 +230,8 @@ public class MenuLunch extends JFrame{
                 int index = 0;
                 for (int row = 0; row < 4; row++) {
                     for (int col = 0; col < 4; col++) {
-                        buttons[row][col].setIcon(aImages[index]);
-                        buttons[row][col].setRolloverIcon(bImages[index]);
+                        buttons[row][col].setIcon(Lunch_menu_Images[index]);
+                        buttons[row][col].setRolloverIcon(Lunch_menu_dark_Images[index]);
                         index++;
                         buttons[row][col].addMouseListener(new MouseAdapter() {
                             @Override
