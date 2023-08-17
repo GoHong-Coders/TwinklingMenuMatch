@@ -13,4 +13,8 @@ public class MenuVO {
     public ArrayList<MenuVO> select(){
         return svoList;
     }
+    //delete 삭제 메소드
+    public void delete(int row){
+        svoList.remove(row);
+    }
 }

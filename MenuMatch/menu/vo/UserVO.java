@@ -13,6 +13,10 @@ public class UserVO {
         this.user_pass = user_pass;
     }
 
+    public UserVO() {
+
+    }
+
     // Getter 메서드
     public String getUserId() {
         return user_id;

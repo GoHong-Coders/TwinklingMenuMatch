@@ -1,11 +1,10 @@
 package menu.view;
 
+import menu.vo.UserVO;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import javax.swing.border.Border;
 
 public class MenuJoin extends JFrame {
@@ -22,6 +21,12 @@ public class MenuJoin extends JFrame {
     //버튼만들기
     private JButton joinBtn;
     private JButton cancelBtn;
+
+    private String user_id;
+    private String user_name;
+    private String user_pass;
+    private String user_retry;
+    private Boolean login_check = false;
 
     private Font font = new Font("Gowun Batang", Font.PLAIN, 14); // 폰트 설정
 
@@ -61,6 +66,8 @@ public class MenuJoin extends JFrame {
                 }
             }
         });
+
+
 
 
 
@@ -168,6 +175,35 @@ public class MenuJoin extends JFrame {
         // 취소 버튼
         cancelBtn = createButton("imgs/join_cancelBtn.png", "imgs/join_cancelBtn_enter.png", 318, 542, 170, 60);
 
+        joinBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // JTextField에서 입력된 값을 변수에 할당
+                user_id = Join_Id_tf.getText();
+                user_name = Join_name_tf.getText();
+                user_pass = Join_pass_tf.getText();
+                user_retry = Join_retry_tf.getText();
+
+                // 이후 변수(user_id)를 활용하여 처리 가능
+                System.out.println("User ID: " + user_id);
+                System.out.println("User ID: " + user_name);
+                System.out.println("User ID: " + user_pass);
+                System.out.println("User ID: " + user_retry);
+
+                if(user_pass.equals(user_retry)){
+                    login_check = true;
+                }else {
+                    JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다", "비밀번호를 다시 확인해주세요.", JOptionPane.ERROR_MESSAGE);
+                    // JOptionPane.showMessageDialog(Component parentComponent, 출력할 문자 메시지, 제목표시줄에
+                    // 나타날 제목, 메시지 종류를 지정);
+
+                }
+            }
+        });
+
+
+
+
         // 배경 사진 넣기
         JLabel backgroud_Label = new JLabel("");
         ImageIcon JoinScreen_Img = new ImageIcon(this.getClass().getResource("/joinScreen.png"));
@@ -198,8 +234,6 @@ public class MenuJoin extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE); //무조건 있어야함 끝내는것
 
         setVisible(true); // JFrame을 화면에 표시
-
-
     }
 
     private JButton createButton(String imgPath, String imgPathEnter, int x, int y, int width, int height) {
@@ -231,6 +265,14 @@ public class MenuJoin extends JFrame {
 
         panel.add(button);
         return button;
+    }
+
+    public UserVO neededInsertData(){
+        UserVO vo = new UserVO();
+        vo.setUserId(user_id);
+        vo.setUserId(user_name);
+        vo.setUserId(user_pass);
+        return vo;
     }
 
     public static void main(String[] args) {
