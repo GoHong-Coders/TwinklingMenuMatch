@@ -15,6 +15,7 @@ public class UserVO {
 
     public UserVO() {}
 
+
     // Getter 메서드
     public String getUserId() {
         return user_id;

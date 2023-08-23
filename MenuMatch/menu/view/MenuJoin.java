@@ -32,6 +32,10 @@ public class MenuJoin extends JFrame {
     private Font font = new Font("Gowun Batang", Font.PLAIN, 14); // 폰트 설정
 
     public MenuJoin() {
+        JoinUI();
+    }
+
+    public void JoinUI() {
         panel = new JPanel(null);
 
         Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
@@ -187,9 +191,9 @@ public class MenuJoin extends JFrame {
 
                 // 이후 변수(user_id)를 활용하여 처리 가능
                 System.out.println("User ID: " + user_id);
-                System.out.println("User ID: " + user_name);
-                System.out.println("User ID: " + user_pass);
-                System.out.println("User ID: " + user_retry);
+                System.out.println("User NAME: " + user_name);
+                System.out.println("User PASS: " + user_pass);
+                System.out.println("User RETRY: " + user_retry);
 
 
 
