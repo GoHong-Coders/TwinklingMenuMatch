@@ -1,5 +1,10 @@
 package menu.view;
 
+import menu.controller.UserJoin;
+import menu.controller.UserLogin;
+import menu.vo.LoginVO;
+import menu.vo.UserVO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,7 +16,13 @@ public class MenuLogin extends JFrame {
     private JPasswordField Login_pass_tf;
     private JButton loginBtn;
     private JButton joinBtn;
+
+    private String login_id;
+    private String login_pass;
+
     private Font font = new Font("Gowun Batang", Font.PLAIN, 14); // 폰트 설정
+
+//    MenuJoin e = new MenuJoin();
 
     public MenuLogin() {
         LoginUI();
@@ -136,10 +147,20 @@ public class MenuLogin extends JFrame {
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                // JTextField에서 입력된 값을 변수에 할당
+                login_id = Login_Id_tf.getText();
+                login_pass = Login_pass_tf.getText();
+
+                // 이후 변수(user_id)를 활용하여 처리 가능
+                System.out.println("User ID: " + login_id);
+                System.out.println("User PASS: " + login_pass);
+
                 if (button == loginBtn) {
-                    // 로그인 버튼 클릭 시 동작 코드 작성
+                    LoginVO vo = new LoginVO(login_id, login_pass);
+                    UserLogin login = new UserLogin();
+                    login.Login(vo);
                 } else if (button == joinBtn) {
-                    // 회원가입 버튼 클릭 시 동작 코드 작성
+
                 }
             }
 

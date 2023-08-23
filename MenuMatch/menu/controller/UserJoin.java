@@ -40,9 +40,6 @@ public class UserJoin {
             e.printStackTrace();
         }
     }
-    public static void main(String[] args) {
-//        UserJoin join = new UserJoin();
-//        join.Join();
-    }
+    public static void main(String[] args) { }
 }
 
