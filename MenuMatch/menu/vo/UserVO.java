@@ -13,9 +13,7 @@ public class UserVO {
         this.user_pass = user_pass;
     }
 
-    public UserVO() {
-
-    }
+    public UserVO() {}
 
     // Getter 메서드
     public String getUserId() {
@@ -41,5 +39,10 @@ public class UserVO {
 
     public void setUserPass(String user_pass) {
         this.user_pass = user_pass;
+    }
+
+    @Override
+    public String toString() {
+        return "Member [memberId=" + user_id + ", memberPwd=" + user_pass + ", memberName=" + user_name ;
     }
 }
