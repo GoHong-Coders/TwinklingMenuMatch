@@ -296,6 +296,13 @@ public class MenuView extends JFrame{
         morningBtn.setIcon(morningBtn_img);
         morningBtn.setContentAreaFilled(false);
         tapPn.add(morningBtn);
+
+        morningBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                new MenuMorning();
+            }
+        });
     }
 
     public void LunchBtn(){ // 점심 버튼
@@ -305,6 +312,13 @@ public class MenuView extends JFrame{
         lunchBtn.setIcon(lunchBtn_img);
         lunchBtn.setContentAreaFilled(false);
         tapPn.add(lunchBtn);
+
+        lunchBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                new MenuLunch();
+            }
+        });
     }
 
     public void DinnerBtn() { // 저녁 버튼
@@ -314,6 +328,13 @@ public class MenuView extends JFrame{
         dinnerBtn.setIcon(dinnerBtn_img);
         dinnerBtn.setContentAreaFilled(false);
         tapPn.add(dinnerBtn);
+
+        dinnerBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                new MenuDinner();
+            }
+        });
     }
 
     public void MenuXBtn(){ // 메뉴 설명 X 버튼 (닫기 버튼과 같음)
@@ -370,7 +391,7 @@ public class MenuView extends JFrame{
         });
     }
 
-    public void MenuRandomSelectBtn(){
+    public void MenuRandomSelectBtn(){ // 메뉴 랜덤 선택 버튼
         menuRandomSelectBtn.setBounds(282, 350, 190, 80);
         menuRandomSelectBtn.setBorderPainted(false);
         menuRandomSelectBtn.setIcon(menuRandomSelect_img);
@@ -378,12 +399,12 @@ public class MenuView extends JFrame{
         menu_RandomPn.add(menuRandomSelectBtn);
     }
 
-    public void MenuRandomTf(){
+    public void MenuRandomTf(){ // 메뉴 랜덤 텍스트필드
         menurandomTF.setBounds(52, 157, 650, 145);
         menu_RandomPn.add(menurandomTF);
     }
 
-    public void MenuRecordDeleteBtn(){
+    public void MenuRecordDeleteBtn(){ // 메뉴 기록 삭제 버튼
         menuRecordDeleteBtn.setBounds(47, 455, 640, 90);
         menuRecordDeleteBtn.setBorderPainted(false);
         menuRecordDeleteBtn.setIcon(menuRecordDelete_img);

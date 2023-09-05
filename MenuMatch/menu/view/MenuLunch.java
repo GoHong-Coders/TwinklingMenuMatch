@@ -205,6 +205,8 @@ public class MenuLunch extends JFrame{
             public void mousePressed(MouseEvent e) {
                 lunchBtn.setIcon(lunchBtn_img);
                 dinnerBtn.setIcon(dinnerBtn_img);
+
+                new MenuMorning();
             }
         });
     }
@@ -217,43 +219,39 @@ public class MenuLunch extends JFrame{
         lunchBtn.setContentAreaFilled(false);
         tapPn.add(lunchBtn);
 
-        lunchBtn.addMouseListener(new MouseAdapter() { // 마우스 이벤트
-            @Override public void mousePressed(MouseEvent e) { // 마우스 클릭했을때
-                lunchBtn.setIcon(lunchBtnClick_img);
-                morningBtn.setIcon(morningBtn_img);
-                dinnerBtn.setIcon(dinnerBtn_img);
+        lunchBtn.setIcon(lunchBtnClick_img);
+        morningBtn.setIcon(morningBtn_img);
+        dinnerBtn.setIcon(dinnerBtn_img);
 
-                // 버튼 이미지 생성
-                ImageIcon[] Lunch_menu_Images = new ImageIcon[16];
-                ImageIcon[] Lunch_menu_dark_Images = new ImageIcon[16];
-                for (int i = 1; i <= 16; i++) {
-                    String imagePath_1 = "imgs/Lunch_menu/lunch_menu" + i + ".png";
-                    String imagePath_2 = "imgs/Lunch_menu/lunch_menu_dark_" + i + ".png";
-                    ImageIcon icon_1 = new ImageIcon(imagePath_1);
-                    ImageIcon icon_2 = new ImageIcon(imagePath_2);
-                    Lunch_menu_Images[i - 1] = icon_1;
-                    Lunch_menu_dark_Images[i - 1] = icon_2;
-                }
+        // 버튼 이미지 생성
+        ImageIcon[] Lunch_menu_Images = new ImageIcon[16];
+        ImageIcon[] Lunch_menu_dark_Images = new ImageIcon[16];
+        for (int i = 1; i <= 16; i++) {
+            String imagePath_1 = "imgs/Lunch_menu/lunch_menu" + i + ".png";
+            String imagePath_2 = "imgs/Lunch_menu/lunch_menu_dark_" + i + ".png";
+            ImageIcon icon_1 = new ImageIcon(imagePath_1);
+            ImageIcon icon_2 = new ImageIcon(imagePath_2);
+            Lunch_menu_Images[i - 1] = icon_1;
+            Lunch_menu_dark_Images[i - 1] = icon_2;
+        }
 
 
-                // 버튼에 이미지 삽입
-                int index = 0;
-                for (int row = 0; row < 4; row++) {
-                    for (int col = 0; col < 4; col++) {
-                        buttons[row][col].setIcon(Lunch_menu_Images[index]);
-                        buttons[row][col].setRolloverIcon(Lunch_menu_dark_Images[index]);
-                        index++;
-                        buttons[row][col].addMouseListener(new MouseAdapter() {
-                            @Override
-                            public void mousePressed(MouseEvent e) {
-                            }
-                        });
-                        menuPn.add(buttons[row][col]);
+        // 버튼에 이미지 삽입
+        int index = 0;
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 4; col++) {
+                buttons[row][col].setIcon(Lunch_menu_Images[index]);
+                buttons[row][col].setRolloverIcon(Lunch_menu_dark_Images[index]);
+                index++;
+                buttons[row][col].addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
                     }
-                }
+                });
+                menuPn.add(buttons[row][col]);
             }
+        }
 
-        });
     }
 
     public void DinnerBtn() { // 저녁 버튼
@@ -269,6 +267,8 @@ public class MenuLunch extends JFrame{
             public void mousePressed(MouseEvent e) {
                 morningBtn.setIcon(morningBtn_img);
                 lunchBtn.setIcon(lunchBtn_img);
+
+                new MenuDinner();
             }
         });
     }
