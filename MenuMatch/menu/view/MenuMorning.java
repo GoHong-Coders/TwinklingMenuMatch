@@ -248,6 +248,7 @@ public class MenuMorning extends JFrame{
                 dinnerBtn.setIcon(dinnerBtn_img);
 
                 new MenuLunch();
+                dispose();
             }
         });
     }
@@ -267,6 +268,7 @@ public class MenuMorning extends JFrame{
                 lunchBtn.setIcon(lunchBtn_img);
 
                 new MenuDinner();
+                dispose();
             }
         });
     }

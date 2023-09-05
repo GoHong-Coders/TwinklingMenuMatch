@@ -301,6 +301,7 @@ public class MenuView extends JFrame{
             @Override
             public void mousePressed(MouseEvent e) {
                 new MenuMorning();
+                dispose();
             }
         });
     }
@@ -317,6 +318,7 @@ public class MenuView extends JFrame{
             @Override
             public void mousePressed(MouseEvent e) {
                 new MenuLunch();
+                dispose();
             }
         });
     }
@@ -333,6 +335,7 @@ public class MenuView extends JFrame{
             @Override
             public void mousePressed(MouseEvent e) {
                 new MenuDinner();
+                dispose();
             }
         });
     }
