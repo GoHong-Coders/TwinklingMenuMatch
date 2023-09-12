@@ -68,6 +68,17 @@ public class MenuView extends JFrame{
             g.drawImage(image, 0, 0, this);
         }
     };
+    JPanel menu_RecordTextPn = new JPanel(null){
+        @Override
+        protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+            ImageIcon imageIcon = new ImageIcon("imgs/record_label.png");
+            Image image = imageIcon.getImage();
+
+            // 이미지를 패널에 그림
+            g.drawImage(image, 0, 0, this);
+        }
+    };
 
     // 버튼
     JButton homeBtn = new JButton("");
@@ -79,6 +90,7 @@ public class MenuView extends JFrame{
     JButton menuXBtn = new JButton("");
     JButton menuRandomXBtn = new JButton("");
     JButton menuRecordXBtn = new JButton("");
+    JButton menuRecord_Text_XBtn = new JButton("");
     JButton menuCloseBtn = new JButton("");
     JButton menuSelectBtn = new JButton("");
     JButton menuRandomSelectBtn = new JButton("");
@@ -91,6 +103,7 @@ public class MenuView extends JFrame{
 
     // 텍스트 필드
     JTextField menurandomTF = new JTextField("");
+    JTextField menuTF = new JTextField("");
 
     // 이미지 삽입
     ImageIcon homeBtn_img = new ImageIcon("imgs/Home.png");
@@ -113,9 +126,9 @@ public class MenuView extends JFrame{
     ImageIcon menu_img = new ImageIcon("imgs/menu.png");
     ImageIcon randomtext_img = new ImageIcon("imgs/random_text.png");
     ImageIcon recordtext_img = new ImageIcon("imgs/record_text.png");
+    ImageIcon record_img = new ImageIcon("imgs/record_label.png");
     ImageIcon menuRandomSelect_img = new ImageIcon("imgs/check.png");
     ImageIcon menuRecordDelete_img = new ImageIcon("imgs/delete.png");
-    ImageIcon menurandomTF_img = new ImageIcon("imgs/text.png");
 
     JScrollPane scrollPane = new JScrollPane(menuPn);
 
@@ -143,6 +156,7 @@ public class MenuView extends JFrame{
         MenuCloseBtn();
         MenuXBtn();
         MenuSelectBtn();
+        MenuTf();
 
         // 랜덤 메뉴 버튼 추가
         MenuRandomXBtn();
@@ -152,6 +166,7 @@ public class MenuView extends JFrame{
         // 메뉴 불러오기 버튼 추가
         MenuRecordDeleteBtn();
         MenuRecordXBtn();
+        MenuRecord_Text_XBtn();
 
         // 버튼 배열 추가
         addButtonsToPanel();
@@ -199,9 +214,7 @@ public class MenuView extends JFrame{
                         menuF.setResizable(false);
                         menuF.add(menu_descriptionPn);
 
-                        menu_descriptionPn.add(menu_WindowPn);
                         menu_descriptionPn.setBounds(0,0,670,680);
-                        menu_WindowPn.setBounds(50, 80, 560, 400);
 
                         menuF.addWindowListener(new WindowAdapter() {
                             @Override public void windowClosing(WindowEvent e) { // X 누를 시 메뉴 설명 화면이 사라짐
@@ -241,9 +254,11 @@ public class MenuView extends JFrame{
                 menu_RecordF.setLocationRelativeTo(null);
                 menu_RecordF.setResizable(false);
                 menu_RecordF.add(menu_RecordPn);
+                menu_RecordPn.add(menu_RecordTextPn);
 
                 menu_RecordPn.setBounds(0,0, 754, 610);
                 menu_RecordPn.add(recordtextLb);
+                menu_RecordTextPn.setBounds(47, 128, 640, 94);
                 recordtextLb.setIcon(recordtext_img);
                 recordtextLb.setVisible(true);
                 recordtextLb.setBounds(33, 20, 267, 55);
@@ -379,6 +394,11 @@ public class MenuView extends JFrame{
         menu_descriptionPn.add(menuSelectBtn);
     }
 
+    public void MenuTf(){ // 메뉴 텍스트필드
+        menuTF.setBounds(50, 80, 560, 400);
+        menu_descriptionPn.add(menuTF);
+    }
+
     public void MenuRandomXBtn(){ // 메뉴 설명 X 버튼 (닫기 버튼과 같음)
         menuRandomXBtn.setBounds(681, 20, 37, 37);
         menuRandomXBtn.setBorderPainted(false);
@@ -428,6 +448,15 @@ public class MenuView extends JFrame{
                 menu_RecordF.dispose();
             }
         });
+    }
+
+    public void MenuRecord_Text_XBtn(){ // 메뉴 설명 X 버튼 (닫기 버튼과 같음)
+        menuRecord_Text_XBtn.setBounds(641, 163, 22, 20);
+        menuRecord_Text_XBtn.setBorderPainted(false);
+        menuRecord_Text_XBtn.setRolloverIcon(menuXBtnClick_img);
+        menuRecord_Text_XBtn.setIcon(menuXBtn_img);
+        menuRecord_Text_XBtn.setContentAreaFilled(false);
+        menu_RecordTextPn.add(menuRecord_Text_XBtn);
     }
 
     public static void main(String[] args) {
