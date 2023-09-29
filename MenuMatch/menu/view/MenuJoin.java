@@ -1,6 +1,7 @@
 package menu.view;
 
 import menu.vo.UserVO;
+import menu.controller.UserJoin;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +31,11 @@ public class MenuJoin extends JFrame {
 
     private Font font = new Font("Gowun Batang", Font.PLAIN, 14); // 폰트 설정
 
-    MenuJoin() {
+    public MenuJoin() {
+        JoinUI();
+    }
+
+    public void JoinUI() {
         panel = new JPanel(null);
 
         Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
@@ -186,12 +191,17 @@ public class MenuJoin extends JFrame {
 
                 // 이후 변수(user_id)를 활용하여 처리 가능
                 System.out.println("User ID: " + user_id);
-                System.out.println("User ID: " + user_name);
-                System.out.println("User ID: " + user_pass);
-                System.out.println("User ID: " + user_retry);
+                System.out.println("User NAME: " + user_name);
+                System.out.println("User PASS: " + user_pass);
+                System.out.println("User RETRY: " + user_retry);
+
+
 
                 if(user_pass.equals(user_retry)){
                     login_check = true;
+                    UserVO vo = new UserVO(user_id, user_name, user_pass);
+                    UserJoin join = new UserJoin();
+                    join.Join(vo);
                 }else {
                     JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다", "비밀번호를 다시 확인해주세요.", JOptionPane.ERROR_MESSAGE);
                     // JOptionPane.showMessageDialog(Component parentComponent, 출력할 문자 메시지, 제목표시줄에
@@ -200,8 +210,6 @@ public class MenuJoin extends JFrame {
                 }
             }
         });
-
-
 
 
         // 배경 사진 넣기
@@ -267,13 +275,12 @@ public class MenuJoin extends JFrame {
         return button;
     }
 
-    public UserVO neededInsertData(){
-        UserVO vo = new UserVO();
-        vo.setUserId(user_id);
-        vo.setUserId(user_name);
-        vo.setUserId(user_pass);
-        return vo;
-    }
+//    public void neededInsertData(){
+//        UserVO vo = new UserVO();
+//        vo.setUserId(user_id);
+//        vo.setUserId(user_name);
+//        vo.setUserId(user_pass);
+//    }
 
     public static void main(String[] args) {
         MenuJoin e = new MenuJoin();

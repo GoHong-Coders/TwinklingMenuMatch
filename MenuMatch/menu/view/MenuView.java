@@ -35,17 +35,6 @@ public class MenuView extends JFrame{
             g.drawImage(image, 0, 0, this);
         }
     };
-    JPanel menu_WindowPn = new JPanel(null){ // 메뉴 설명창
-        @Override
-        protected void paintComponent(Graphics g){
-            super.paintComponent(g);
-            ImageIcon imageIcon = new ImageIcon("imgs/white.png");
-            Image image = imageIcon.getImage();
-
-            // 이미지를 패널에 그림
-            g.drawImage(image, 0, 0, this);
-        }
-    };
     JPanel menu_RandomPn = new JPanel(null){ // 랜덤메뉴 선택 패널
         @Override
         protected void paintComponent(Graphics g){
