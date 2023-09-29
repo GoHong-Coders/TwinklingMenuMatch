@@ -205,7 +205,7 @@ public class MenuJoin extends JFrame {
 
                     if(join.JoinCheck()) {
                         JOptionPane.showMessageDialog(null, "회원가입이 되었습니다!", "회원가입 확인 여부", JOptionPane.INFORMATION_MESSAGE);
-                        new MenuTime();
+                        new MenuLogin();
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "회원가입이 되지 않았습니다.", "회원가입 확인 여부", JOptionPane.ERROR_MESSAGE);
@@ -218,7 +218,6 @@ public class MenuJoin extends JFrame {
                 }
             }
         });
-
 
         // 배경 사진 넣기
         JLabel backgroud_Label = new JLabel("");
