@@ -7,6 +7,8 @@ import java.awt.event.*;
 public class MenuMorning extends JFrame{
     // 프레임
     JFrame menuF = new JFrame("Menu Description"); // 메뉴 설명
+    JFrame menu_RandomF = new JFrame("Random Menu"); // 랜덤 메뉴
+    JFrame menu_RecordF = new JFrame("Menu Record"); // 메뉴 불러오기
 
     // 패널
     JPanel tapPn = new JPanel(null){
@@ -43,7 +45,28 @@ public class MenuMorning extends JFrame{
             g.drawImage(image, 0, 0, this);
         }
     };
+    JPanel menu_RandomPn = new JPanel(null){ // 랜덤메뉴 선택 패널
+        @Override
+        protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+            ImageIcon imageIcon = new ImageIcon("imgs/white_2.png");
+            Image image = imageIcon.getImage();
 
+            // 이미지를 패널에 그림
+            g.drawImage(image, 0, 0, this);
+        }
+    };
+    JPanel menu_RecordPn = new JPanel(null){ // 메뉴 불러오기 패널
+        @Override
+        protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+            ImageIcon imageIcon = new ImageIcon("imgs/white_2.png");
+            Image image = imageIcon.getImage();
+
+            // 이미지를 패널에 그림
+            g.drawImage(image, 0, 0, this);
+        }
+    };
 
     // 버튼
     JButton homeBtn = new JButton("");
@@ -53,9 +76,20 @@ public class MenuMorning extends JFrame{
     JButton lunchBtn = new JButton("");
     JButton dinnerBtn = new JButton("");
     JButton menuXBtn = new JButton("");
+    JButton menuRandomXBtn = new JButton("");
+    JButton menuRecordXBtn = new JButton("");
     JButton menuCloseBtn = new JButton("");
     JButton menuSelectBtn = new JButton("");
+    JButton menuRandomSelectBtn = new JButton("");
+    JButton menuRecordDeleteBtn = new JButton("");
     JButton[][] buttons = new JButton[4][4]; // 4행 4열의 버튼 배열 선언
+
+    // 라벨
+    JLabel randomtextLb = new JLabel("");
+    JLabel recordtextLb = new JLabel("");
+
+    // 텍스트 필드
+    JTextField menurandomTF = new JTextField("");
 
     // 이미지 삽입
     ImageIcon homeBtn_img = new ImageIcon("imgs/Home.png");
@@ -70,11 +104,17 @@ public class MenuMorning extends JFrame{
     ImageIcon lunchBtnClick_img = new ImageIcon("imgs/lunch.png");
     ImageIcon dinnerBtnClick_img = new ImageIcon("imgs/dinner.png");
     ImageIcon menuXBtn_img = new ImageIcon("imgs/x.png");
+    ImageIcon menuXBtnClick_img = new ImageIcon("imgs/x_clicked.png");
     ImageIcon menuCloseBtn_img = new ImageIcon("imgs/close.png");
     ImageIcon menuCloseBtnClick_img = new ImageIcon("imgs/close_clicked.png");
     ImageIcon menuSelectBtn_img = new ImageIcon("imgs/select.png");
     ImageIcon menuSelectBtnClick_img = new ImageIcon("imgs/select_clicked.png");
     ImageIcon menu_img = new ImageIcon("imgs/menu.png");
+    ImageIcon randomtext_img = new ImageIcon("imgs/random_text.png");
+    ImageIcon recordtext_img = new ImageIcon("imgs/record_text.png");
+    ImageIcon menuRandomSelect_img = new ImageIcon("imgs/check.png");
+    ImageIcon menuRecordDelete_img = new ImageIcon("imgs/delete.png");
+    ImageIcon menurandomTF_img = new ImageIcon("imgs/text.png");
 
     JScrollPane scrollPane = new JScrollPane(menuPn);
 
@@ -103,6 +143,11 @@ public class MenuMorning extends JFrame{
         MenuCloseBtn();
         MenuXBtn();
         MenuSelectBtn();
+
+        // 랜덤 메뉴 버튼 추가
+        MenuRandomXBtn();
+        MenuRandomSelectBtn();
+        MenuRandomTf();
 
         // 버튼 배열 추가
         addButtonsToPanel();
@@ -190,6 +235,30 @@ public class MenuMorning extends JFrame{
         randomBtn.setIcon(randomBtn_img);
         randomBtn.setContentAreaFilled(false);
         tapPn.add(randomBtn);
+
+        randomBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                menu_RandomF.setVisible(true);
+                menu_RandomF.setSize(754, 493);
+                menu_RandomF.setLayout(null);
+                menu_RandomF.setLocationRelativeTo(null);
+                menu_RandomF.setResizable(false);
+                menu_RandomF.add(menu_RandomPn);
+
+                menu_RandomPn.setBounds(0,0, 754, 493);
+                menu_RandomPn.add(randomtextLb);
+                randomtextLb.setIcon(randomtext_img);
+                randomtextLb.setVisible(true);
+                randomtextLb.setBounds(250, 20, 270, 50);
+
+                menu_RandomF.addWindowListener(new WindowAdapter() {
+                    @Override public void windowClosing(WindowEvent e) { // X 누를 시 메뉴 설명 화면이 사라짐
+                        menu_RandomF.dispose();
+                    }
+                });
+            }
+        });
     }
 
     public void MorningBtn(){ // 아침 버튼
@@ -200,42 +269,37 @@ public class MenuMorning extends JFrame{
         morningBtn.setContentAreaFilled(false);
         tapPn.add(morningBtn);
 
-        morningBtn.addMouseListener(new MouseAdapter() { // 마우스 이벤트
-            @Override public void mousePressed(MouseEvent e) { // 마우스 클릭했을때
-                morningBtn.setIcon(morningBtnClick_img);
-                lunchBtn.setIcon(lunchBtn_img);
-                dinnerBtn.setIcon(dinnerBtn_img);
+        morningBtn.setIcon(morningBtnClick_img);
+        lunchBtn.setIcon(lunchBtn_img);
+        dinnerBtn.setIcon(dinnerBtn_img);
 
-                // 버튼 이미지 생성
-                ImageIcon[] Morning_menu_Images = new ImageIcon[16];
-                ImageIcon[] Morning_menu_dark_Images = new ImageIcon[16];
-                for (int i = 1; i <= 16; i++) {
-                    String imagePath_1 = "imgs/Morning_menu/morning_menu" + i + ".png";
-                    String imagePath_2 = "imgs/Morning_menu/morning_menu_dark_" + i + ".png";
-                    ImageIcon icon_1 = new ImageIcon(imagePath_1);
-                    ImageIcon icon_2 = new ImageIcon(imagePath_2);
-                    Morning_menu_Images[i - 1] = icon_1;
-                    Morning_menu_dark_Images[i - 1] = icon_2;
-                }
+        // 버튼 이미지 생성
+        ImageIcon[] Morning_menu_Images = new ImageIcon[16];
+        ImageIcon[] Morning_menu_dark_Images = new ImageIcon[16];
+        for (int i = 1; i <= 16; i++) {
+            String imagePath_1 = "imgs/Morning_menu/morning_menu" + i + ".png";
+            String imagePath_2 = "imgs/Morning_menu/morning_menu_dark_" + i + ".png";
+            ImageIcon icon_1 = new ImageIcon(imagePath_1);
+            ImageIcon icon_2 = new ImageIcon(imagePath_2);
+            Morning_menu_Images[i - 1] = icon_1;
+            Morning_menu_dark_Images[i - 1] = icon_2;
+        }
 
-                // 버튼에 이미지 삽입
-                int index = 0;
-                for (int row = 0; row < 4; row++) {
-                    for (int col = 0; col < 4; col++) {
-                        buttons[row][col].setIcon(Morning_menu_Images[index]);
-                        buttons[row][col].setRolloverIcon(Morning_menu_dark_Images[index]);
-                        index++;
-                        buttons[row][col].addMouseListener(new MouseAdapter() {
-                            @Override
-                            public void mousePressed(MouseEvent e) {
-                            }
-                        });
-                        menuPn.add(buttons[row][col]);
+        // 버튼에 이미지 삽입
+        int index = 0;
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 4; col++) {
+                buttons[row][col].setIcon(Morning_menu_Images[index]);
+                buttons[row][col].setRolloverIcon(Morning_menu_dark_Images[index]);
+                index++;
+                buttons[row][col].addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
                     }
-                }
+                });
+                menuPn.add(buttons[row][col]);
             }
-
-        });
+        }
     }
 
     public void LunchBtn(){ // 점심 버튼
@@ -251,6 +315,9 @@ public class MenuMorning extends JFrame{
             public void mousePressed(MouseEvent e) {
                 morningBtn.setIcon(morningBtn_img);
                 dinnerBtn.setIcon(dinnerBtn_img);
+
+                new MenuLunch();
+                dispose();
             }
         });
     }
@@ -268,6 +335,9 @@ public class MenuMorning extends JFrame{
             public void mousePressed(MouseEvent e) {
                 morningBtn.setIcon(morningBtn_img);
                 lunchBtn.setIcon(lunchBtn_img);
+
+                new MenuDinner();
+                dispose();
             }
         });
     }
@@ -310,6 +380,33 @@ public class MenuMorning extends JFrame{
         menu_descriptionPn.add(menuSelectBtn);
     }
 
+    public void MenuRandomXBtn(){ // 메뉴 설명 X 버튼 (닫기 버튼과 같음)
+        menuRandomXBtn.setBounds(681, 20, 37, 37);
+        menuRandomXBtn.setBorderPainted(false);
+        menuRandomXBtn.setRolloverIcon(menuXBtnClick_img);
+        menuRandomXBtn.setIcon(menuXBtn_img);
+        menuRandomXBtn.setContentAreaFilled(false);
+        menu_RandomPn.add(menuRandomXBtn);
+
+        menuRandomXBtn.addMouseListener(new MouseAdapter() {
+            @Override public void mousePressed(MouseEvent e) {
+                menu_RandomF.dispose();
+            }
+        });
+    }
+
+    public void MenuRandomSelectBtn(){ // 메뉴 랜덤 선택 버튼
+        menuRandomSelectBtn.setBounds(282, 350, 190, 80);
+        menuRandomSelectBtn.setBorderPainted(false);
+        menuRandomSelectBtn.setIcon(menuRandomSelect_img);
+        menuRandomSelectBtn.setContentAreaFilled(false);
+        menu_RandomPn.add(menuRandomSelectBtn);
+    }
+
+    public void MenuRandomTf(){ // 메뉴 랜덤 텍스트필드
+        menurandomTF.setBounds(52, 157, 650, 145);
+        menu_RandomPn.add(menurandomTF);
+    }
     public static void main(String[] args){
         MenuMorning e = new MenuMorning();
     }
