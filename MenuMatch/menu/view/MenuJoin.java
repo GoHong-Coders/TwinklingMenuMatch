@@ -1,5 +1,6 @@
 package menu.view;
 
+import menu.controller.UserLogin;
 import menu.vo.UserVO;
 import menu.controller.UserJoin;
 
@@ -176,9 +177,9 @@ public class MenuJoin extends JFrame {
 
 
         // 로그인 버튼
-        joinBtn = createButton("imgs/join_joinBtn.png", "imgs/join_joinBtn_enter.png", 93, 542, 170, 60);
+        joinBtn = createButton("imgs/join_joinBtn.png", "imgs/join_joinBtn_enter.png", 93, 542, 170, 60, "join");
         // 취소 버튼
-        cancelBtn = createButton("imgs/join_cancelBtn.png", "imgs/join_cancelBtn_enter.png", 318, 542, 170, 60);
+        cancelBtn = createButton("imgs/join_cancelBtn.png", "imgs/join_cancelBtn_enter.png", 318, 542, 170, 60, "cancel");
 
         joinBtn.addActionListener(new ActionListener() {
             @Override
@@ -198,10 +199,17 @@ public class MenuJoin extends JFrame {
 
 
                 if(user_pass.equals(user_retry)){
-                    login_check = true;
                     UserVO vo = new UserVO(user_id, user_name, user_pass);
                     UserJoin join = new UserJoin();
                     join.Join(vo);
+
+                    if(join.JoinCheck()) {
+                        JOptionPane.showMessageDialog(null, "회원가입이 되었습니다!", "회원가입 확인 여부", JOptionPane.INFORMATION_MESSAGE);
+                        new MenuLogin();
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "회원가입이 되지 않았습니다.", "회원가입 확인 여부", JOptionPane.ERROR_MESSAGE);
+                    }
                 }else {
                     JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다", "비밀번호를 다시 확인해주세요.", JOptionPane.ERROR_MESSAGE);
                     // JOptionPane.showMessageDialog(Component parentComponent, 출력할 문자 메시지, 제목표시줄에
@@ -210,7 +218,6 @@ public class MenuJoin extends JFrame {
                 }
             }
         });
-
 
         // 배경 사진 넣기
         JLabel backgroud_Label = new JLabel("");
@@ -244,7 +251,7 @@ public class MenuJoin extends JFrame {
         setVisible(true); // JFrame을 화면에 표시
     }
 
-    private JButton createButton(String imgPath, String imgPathEnter, int x, int y, int width, int height) {
+    private JButton createButton(String imgPath, String imgPathEnter, int x, int y, int width, int height, String btn) {
         JButton button = new JButton("");
         ImageIcon btnImg = new ImageIcon(imgPath);
         ImageIcon btnImgEnter = new ImageIcon(imgPathEnter);
@@ -257,7 +264,6 @@ public class MenuJoin extends JFrame {
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // 버튼 클릭 시 동작 코드 작성
             }
 
             @Override

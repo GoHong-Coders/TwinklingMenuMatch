@@ -104,11 +104,11 @@ public class MenuTime extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 // 버튼 클릭 시 해당 클래스로 이동
                 if ("Morning".equals(className)) {
-//                    new MenuMorning(); // 아침 메뉴 화면으로 이동
+                    new MenuMorning(); // 아침 메뉴 화면으로 이동
                 } else if ("Lunch".equals(className)) {
-//                    new MenuLunch(); // 아침 메뉴 화면으로  이동
+                    new MenuLunch(); // 아침 메뉴 화면으로  이동
                 } else if ("Dinner".equals(className)) {
-//                    new MenuDinner(); // 저녁 메뉴 화면으로 이동
+                    new MenuDinner(); // 저녁 메뉴 화면으로 이동
                 }
             }
 
