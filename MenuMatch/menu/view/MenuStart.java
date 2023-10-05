@@ -8,7 +8,7 @@ public class MenuStart extends JFrame {
     private JLabel startLb;
     private JButton startBtn;
 
-    MenuStart() {
+    private void MenuStart() {
         startLb = new JLabel((new ImageIcon("imgs/startScreen.png")), JLabel.CENTER);
         startBtn = new JButton("");
 
@@ -46,8 +46,7 @@ public class MenuStart extends JFrame {
         startBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // 버튼 클릭 시 다른 클래스로 이동
-//                new MenuTime();
+                new MenuLogin();
             }
 
             @Override
@@ -66,6 +65,7 @@ public class MenuStart extends JFrame {
 
     public static void main(String[] args){
         MenuStart e = new MenuStart();
+        e.MenuStart();
     }
 
 }

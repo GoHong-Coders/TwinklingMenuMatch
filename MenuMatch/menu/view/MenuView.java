@@ -9,7 +9,6 @@ public class MenuView extends JFrame{
     // 프레임
     JFrame menuF = new JFrame("Menu Description"); // 메뉴 설명
     JFrame menu_RandomF = new JFrame("Random Menu"); // 랜덤 메뉴
-    JFrame menu_RecordF = new JFrame("Menu Record"); // 메뉴 불러오기
 
     // 패널
     JPanel tapPn = new JPanel(null){ // 탭바 패널
@@ -35,33 +34,22 @@ public class MenuView extends JFrame{
             g.drawImage(image, 0, 0, this);
         }
     };
-    JPanel menu_RandomPn = new JPanel(null){ // 랜덤메뉴 선택 패널
+    JPanel menu_WindowPn = new JPanel(null){ // 메뉴 설명창
         @Override
         protected void paintComponent(Graphics g){
             super.paintComponent(g);
-            ImageIcon imageIcon = new ImageIcon("imgs/white_2.png");
+            ImageIcon imageIcon = new ImageIcon("imgs/white.png");
             Image image = imageIcon.getImage();
 
             // 이미지를 패널에 그림
             g.drawImage(image, 0, 0, this);
         }
     };
-    JPanel menu_RecordPn = new JPanel(null){ // 메뉴 불러오기 패널
+    JPanel menu_RandomPn = new JPanel(null){ // 랜던메뉴 선택창
         @Override
         protected void paintComponent(Graphics g){
             super.paintComponent(g);
             ImageIcon imageIcon = new ImageIcon("imgs/white_2.png");
-            Image image = imageIcon.getImage();
-
-            // 이미지를 패널에 그림
-            g.drawImage(image, 0, 0, this);
-        }
-    };
-    JPanel menu_RecordTextPn = new JPanel(null){
-        @Override
-        protected void paintComponent(Graphics g){
-            super.paintComponent(g);
-            ImageIcon imageIcon = new ImageIcon("imgs/record_label.png");
             Image image = imageIcon.getImage();
 
             // 이미지를 패널에 그림
@@ -77,22 +65,16 @@ public class MenuView extends JFrame{
     JButton lunchBtn = new JButton("");
     JButton dinnerBtn = new JButton("");
     JButton menuXBtn = new JButton("");
-    JButton menuRandomXBtn = new JButton("");
-    JButton menuRecordXBtn = new JButton("");
-    JButton menuRecord_Text_XBtn = new JButton("");
     JButton menuCloseBtn = new JButton("");
     JButton menuSelectBtn = new JButton("");
     JButton menuRandomSelectBtn = new JButton("");
-    JButton menuRecordDeleteBtn = new JButton("");
     JButton[][] buttons = new JButton[4][4]; // 4행 4열의 버튼 배열 선언
 
     // 라벨
     JLabel randomtextLb = new JLabel("");
-    JLabel recordtextLb = new JLabel("");
 
     // 텍스트 필드
     JTextField menurandomTF = new JTextField("");
-    JTextField menuTF = new JTextField("");
 
     // 이미지 삽입
     ImageIcon homeBtn_img = new ImageIcon("imgs/Home.png");
@@ -114,10 +96,8 @@ public class MenuView extends JFrame{
     ImageIcon menuSelectBtnClick_img = new ImageIcon("imgs/select_clicked.png");
     ImageIcon menu_img = new ImageIcon("imgs/menu.png");
     ImageIcon randomtext_img = new ImageIcon("imgs/random_text.png");
-    ImageIcon recordtext_img = new ImageIcon("imgs/record_text.png");
-    ImageIcon record_img = new ImageIcon("imgs/record_label.png");
     ImageIcon menuRandomSelect_img = new ImageIcon("imgs/check.png");
-    ImageIcon menuRecordDelete_img = new ImageIcon("imgs/delete.png");
+    ImageIcon menurandomTF_img = new ImageIcon("imgs/text.png");
 
     JScrollPane scrollPane = new JScrollPane(menuPn);
 
@@ -145,17 +125,11 @@ public class MenuView extends JFrame{
         MenuCloseBtn();
         MenuXBtn();
         MenuSelectBtn();
-        MenuTf();
+        MenuRandomTf();
 
         // 랜덤 메뉴 버튼 추가
         MenuRandomXBtn();
         MenuRandomSelectBtn();
-        MenuRandomTf();
-
-        // 메뉴 불러오기 버튼 추가
-        MenuRecordDeleteBtn();
-        MenuRecordXBtn();
-        MenuRecord_Text_XBtn();
 
         // 버튼 배열 추가
         addButtonsToPanel();
@@ -203,7 +177,9 @@ public class MenuView extends JFrame{
                         menuF.setResizable(false);
                         menuF.add(menu_descriptionPn);
 
+                        menu_descriptionPn.add(menu_WindowPn);
                         menu_descriptionPn.setBounds(0,0,670,680);
+                        menu_WindowPn.setBounds(50, 80, 560, 400);
 
                         menuF.addWindowListener(new WindowAdapter() {
                             @Override public void windowClosing(WindowEvent e) { // X 누를 시 메뉴 설명 화면이 사라짐
@@ -233,32 +209,6 @@ public class MenuView extends JFrame{
         recordBtn.setIcon(recordBtn_img);
         recordBtn.setContentAreaFilled(false);
         tapPn.add(recordBtn);
-
-        recordBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                menu_RecordF.setVisible(true);
-                menu_RecordF.setSize(754, 610);
-                menu_RecordF.setLayout(null);
-                menu_RecordF.setLocationRelativeTo(null);
-                menu_RecordF.setResizable(false);
-                menu_RecordF.add(menu_RecordPn);
-                menu_RecordPn.add(menu_RecordTextPn);
-
-                menu_RecordPn.setBounds(0,0, 754, 610);
-                menu_RecordPn.add(recordtextLb);
-                menu_RecordTextPn.setBounds(47, 128, 640, 94);
-                recordtextLb.setIcon(recordtext_img);
-                recordtextLb.setVisible(true);
-                recordtextLb.setBounds(33, 20, 267, 55);
-
-                menu_RecordF.addWindowListener(new WindowAdapter() {
-                    @Override public void windowClosing(WindowEvent e) { // X 누를 시 메뉴 설명 화면이 사라짐
-                        menu_RecordF.dispose();
-                    }
-                });
-            }
-        });
     }
 
     public void RandomBtn(){ // 랜덤 메뉴 버튼
@@ -300,14 +250,6 @@ public class MenuView extends JFrame{
         morningBtn.setIcon(morningBtn_img);
         morningBtn.setContentAreaFilled(false);
         tapPn.add(morningBtn);
-
-        morningBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                new MenuMorning();
-                dispose();
-            }
-        });
     }
 
     public void LunchBtn(){ // 점심 버튼
@@ -317,14 +259,6 @@ public class MenuView extends JFrame{
         lunchBtn.setIcon(lunchBtn_img);
         lunchBtn.setContentAreaFilled(false);
         tapPn.add(lunchBtn);
-
-        lunchBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                new MenuLunch();
-                dispose();
-            }
-        });
     }
 
     public void DinnerBtn() { // 저녁 버튼
@@ -334,14 +268,6 @@ public class MenuView extends JFrame{
         dinnerBtn.setIcon(dinnerBtn_img);
         dinnerBtn.setContentAreaFilled(false);
         tapPn.add(dinnerBtn);
-
-        dinnerBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                new MenuDinner();
-                dispose();
-            }
-        });
     }
 
     public void MenuXBtn(){ // 메뉴 설명 X 버튼 (닫기 버튼과 같음)
@@ -383,27 +309,22 @@ public class MenuView extends JFrame{
         menu_descriptionPn.add(menuSelectBtn);
     }
 
-    public void MenuTf(){ // 메뉴 텍스트필드
-        menuTF.setBounds(50, 80, 560, 400);
-        menu_descriptionPn.add(menuTF);
-    }
-
     public void MenuRandomXBtn(){ // 메뉴 설명 X 버튼 (닫기 버튼과 같음)
-        menuRandomXBtn.setBounds(681, 20, 37, 37);
-        menuRandomXBtn.setBorderPainted(false);
-        menuRandomXBtn.setRolloverIcon(menuXBtnClick_img);
-        menuRandomXBtn.setIcon(menuXBtn_img);
-        menuRandomXBtn.setContentAreaFilled(false);
-        menu_RandomPn.add(menuRandomXBtn);
+        menuXBtn.setBounds(681, 20, 37, 37);
+        menuXBtn.setBorderPainted(false);
+        menuXBtn.setRolloverIcon(menuXBtnClick_img);
+        menuXBtn.setIcon(menuXBtn_img);
+        menuXBtn.setContentAreaFilled(false);
+        menu_RandomPn.add(menuXBtn);
 
-        menuRandomXBtn.addMouseListener(new MouseAdapter() {
+        menuXBtn.addMouseListener(new MouseAdapter() {
             @Override public void mousePressed(MouseEvent e) {
                 menu_RandomF.dispose();
             }
         });
     }
 
-    public void MenuRandomSelectBtn(){ // 메뉴 랜덤 선택 버튼
+    public void MenuRandomSelectBtn(){
         menuRandomSelectBtn.setBounds(282, 350, 190, 80);
         menuRandomSelectBtn.setBorderPainted(false);
         menuRandomSelectBtn.setIcon(menuRandomSelect_img);
@@ -411,41 +332,9 @@ public class MenuView extends JFrame{
         menu_RandomPn.add(menuRandomSelectBtn);
     }
 
-    public void MenuRandomTf(){ // 메뉴 랜덤 텍스트필드
+    public void MenuRandomTf(){
         menurandomTF.setBounds(52, 157, 650, 145);
         menu_RandomPn.add(menurandomTF);
-    }
-
-    public void MenuRecordDeleteBtn(){ // 메뉴 기록 삭제 버튼
-        menuRecordDeleteBtn.setBounds(47, 455, 640, 90);
-        menuRecordDeleteBtn.setBorderPainted(false);
-        menuRecordDeleteBtn.setIcon(menuRecordDelete_img);
-        menuRecordDeleteBtn.setContentAreaFilled(false);
-        menu_RecordPn.add(menuRecordDeleteBtn);
-    }
-
-    public void MenuRecordXBtn(){ // 메뉴 설명 X 버튼 (닫기 버튼과 같음)
-        menuRecordXBtn.setBounds(679, 31, 37, 37);
-        menuRecordXBtn.setBorderPainted(false);
-        menuRecordXBtn.setRolloverIcon(menuXBtnClick_img);
-        menuRecordXBtn.setIcon(menuXBtn_img);
-        menuRecordXBtn.setContentAreaFilled(false);
-        menu_RecordPn.add(menuRecordXBtn);
-
-        menuRecordXBtn.addMouseListener(new MouseAdapter() {
-            @Override public void mousePressed(MouseEvent e) {
-                menu_RecordF.dispose();
-            }
-        });
-    }
-
-    public void MenuRecord_Text_XBtn(){ // 메뉴 설명 X 버튼 (닫기 버튼과 같음)
-        menuRecord_Text_XBtn.setBounds(641, 163, 22, 20);
-        menuRecord_Text_XBtn.setBorderPainted(false);
-        menuRecord_Text_XBtn.setRolloverIcon(menuXBtnClick_img);
-        menuRecord_Text_XBtn.setIcon(menuXBtn_img);
-        menuRecord_Text_XBtn.setContentAreaFilled(false);
-        menu_RecordTextPn.add(menuRecord_Text_XBtn);
     }
 
     public static void main(String[] args) {
