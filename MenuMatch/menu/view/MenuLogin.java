@@ -161,6 +161,7 @@ public class MenuLogin extends JFrame {
                     login.Login(vo);
                     if(login.Login_check()) {
                         JOptionPane.showMessageDialog(null, "로그인이 되었습니다!", "로그인 확인 여부", JOptionPane.INFORMATION_MESSAGE);
+                        vo.setLoginId(login_id);
                         new MenuTime();
                         dispose();
                     } else {

@@ -1,7 +1,7 @@
 package menu.controller;
 
 import menu.vo.DBConnecter;
-
+import menu.vo.UserVO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +11,7 @@ import menu.vo.LoginVO;
 
 public class UserLogin {
     private static Boolean login_check = false;
+    static UserVO vo = new UserVO();
     public static void Login(LoginVO data) {
 
         try {
@@ -31,6 +32,7 @@ public class UserLogin {
             if (resultSet.next()) {
                 login_check = true;
                 System.out.println("로그인 성공");
+                vo.setUserId(login_id);
             } else {
                 System.out.println("로그인 실패");
             }
