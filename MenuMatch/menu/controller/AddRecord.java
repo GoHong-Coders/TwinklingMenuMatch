@@ -1,16 +1,13 @@
 package menu.controller;
 
 import menu.dto.DBConnecter;
-import menu.dto.DinnerDTO;
 import menu.dto.FoodRecordDTO;
-import menu.dto.UserDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AddFood {
+public class AddRecord {
 
     public static void FoodRecordDTO(FoodRecordDTO data) {
         try {

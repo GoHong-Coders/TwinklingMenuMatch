@@ -4,11 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import menu.controller.AddFood;
-import menu.controller.UserLogin;
+import menu.controller.AddRecord;
 import menu.dto.DinnerDTO;
 import menu.dto.FoodRecordDTO;
-import menu.dto.LoginDTO;
 import menu.controller.DinnerInfo;
 import menu.dto.UserDTO;
 
@@ -444,7 +442,7 @@ public class MenuDinner extends JFrame {
         menuSelectBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddFood addFood = new AddFood();
+                AddRecord addFood = new AddRecord();
                 System.out.println("foodRecordDTO : " + foodRecordDTO.getUserID());
                 foodRecordDTO.setMenuName(dto.getMenuName());
                 System.out.println(foodRecordDTO.getMenuName() + " " + foodRecordDTO.getUserID() );
