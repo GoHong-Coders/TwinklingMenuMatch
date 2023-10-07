@@ -1,7 +1,6 @@
 package menu.view;
 
-import menu.controller.UserLogin;
-import menu.vo.UserVO;
+import menu.dto.UserDTO;
 import menu.controller.UserJoin;
 
 import javax.swing.*;
@@ -199,7 +198,7 @@ public class MenuJoin extends JFrame {
 
 
                 if(user_pass.equals(user_retry)){
-                    UserVO vo = new UserVO(user_id, user_name, user_pass);
+                    UserDTO vo = new UserDTO(user_id, user_name, user_pass);
                     UserJoin join = new UserJoin();
                     join.Join(vo);
 
@@ -212,8 +211,7 @@ public class MenuJoin extends JFrame {
                     }
                 }else {
                     JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다", "비밀번호를 다시 확인해주세요.", JOptionPane.ERROR_MESSAGE);
-                    // JOptionPane.showMessageDialog(Component parentComponent, 출력할 문자 메시지, 제목표시줄에
-                    // 나타날 제목, 메시지 종류를 지정);
+                    // JOptionPane.showMessageDialog(Component parentComponent, 출력할 문자 메시지, 제목표시줄에 나타날 제목, 메시지 종류를 지정);
 
                 }
             }
@@ -281,12 +279,6 @@ public class MenuJoin extends JFrame {
         return button;
     }
 
-//    public void neededInsertData(){
-//        UserVO vo = new UserVO();
-//        vo.setUserId(user_id);
-//        vo.setUserId(user_name);
-//        vo.setUserId(user_pass);
-//    }
 
     public static void main(String[] args) {
         MenuJoin e = new MenuJoin();

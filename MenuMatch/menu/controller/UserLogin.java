@@ -1,17 +1,18 @@
 package menu.controller;
 
-import menu.vo.DBConnecter;
-
+import menu.dto.DBConnecter;
+import menu.dto.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import menu.vo.LoginVO;
+import menu.dto.LoginDTO;
 
 public class UserLogin {
     private static Boolean login_check = false;
-    public static void Login(LoginVO data) {
+    static UserDTO vo = new UserDTO();
+    public static void Login(LoginDTO data) {
 
         try {
             // 데이터베이스 연결 가져오기
@@ -31,6 +32,7 @@ public class UserLogin {
             if (resultSet.next()) {
                 login_check = true;
                 System.out.println("로그인 성공");
+                vo.setUserId(login_id);
             } else {
                 System.out.println("로그인 실패");
             }
