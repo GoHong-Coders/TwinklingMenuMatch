@@ -11,6 +11,10 @@ public class DinnerDTO {
         Description = description;
     }
 
+    public DinnerDTO() {
+
+    }
+
     public int getMenuID() {
         return MenuID;
     }

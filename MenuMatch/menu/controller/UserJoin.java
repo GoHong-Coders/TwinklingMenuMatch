@@ -1,16 +1,16 @@
 package menu.controller;
-import menu.vo.DBConnecter;
+import menu.dto.DBConnecter;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import menu.vo.UserVO;
+import menu.dto.UserDTO;
 
 public class UserJoin {
     static Boolean join_check = false;
 
-    public static void Join(UserVO data) {
+    public static void Join(UserDTO data) {
         String user_id = data.getUserId();
         String user_name = data.getUserName();
         String user_pass = data.getUserPass();

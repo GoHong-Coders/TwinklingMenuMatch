@@ -1,18 +1,18 @@
 package menu.controller;
 
-import menu.vo.DBConnecter;
-import menu.vo.UserVO;
+import menu.dto.DBConnecter;
+import menu.dto.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import menu.vo.LoginVO;
+import menu.dto.LoginDTO;
 
 public class UserLogin {
     private static Boolean login_check = false;
-    static UserVO vo = new UserVO();
-    public static void Login(LoginVO data) {
+    static UserDTO vo = new UserDTO();
+    public static void Login(LoginDTO data) {
 
         try {
             // 데이터베이스 연결 가져오기

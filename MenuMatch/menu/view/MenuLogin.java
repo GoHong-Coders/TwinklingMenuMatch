@@ -1,9 +1,7 @@
 package menu.view;
 
-import menu.controller.UserJoin;
 import menu.controller.UserLogin;
-import menu.vo.LoginVO;
-import menu.vo.UserVO;
+import menu.dto.LoginDTO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -156,7 +154,7 @@ public class MenuLogin extends JFrame {
                 System.out.println("User PASS: " + login_pass);
 
                 if (button == loginBtn) {
-                    LoginVO vo = new LoginVO(login_id, login_pass);
+                    LoginDTO vo = new LoginDTO(login_id, login_pass);
                     UserLogin login = new UserLogin();
                     login.Login(vo);
                     if(login.Login_check()) {

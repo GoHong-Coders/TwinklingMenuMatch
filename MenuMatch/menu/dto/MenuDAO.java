@@ -1,4 +1,4 @@
-package menu.vo;
+package menu.dto;
 
 public class MenuDAO {
 }
