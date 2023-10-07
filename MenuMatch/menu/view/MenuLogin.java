@@ -1,6 +1,7 @@
 package menu.view;
 
 import menu.controller.UserLogin;
+import menu.dto.FoodRecordDTO;
 import menu.dto.LoginDTO;
 
 import javax.swing.*;
@@ -9,6 +10,10 @@ import java.awt.event.*;
 import javax.swing.border.Border;
 
 public class MenuLogin extends JFrame {
+    static LoginDTO vo = new LoginDTO();
+    static FoodRecordDTO foodRecordDTO = new FoodRecordDTO();
+
+
     private JPanel panel;
     private JTextField Login_Id_tf;
     private JPasswordField Login_pass_tf;
@@ -154,12 +159,14 @@ public class MenuLogin extends JFrame {
                 System.out.println("User PASS: " + login_pass);
 
                 if (button == loginBtn) {
-                    LoginDTO vo = new LoginDTO(login_id, login_pass);
+                    vo = new LoginDTO(login_id, login_pass);
+
                     UserLogin login = new UserLogin();
                     login.Login(vo);
                     if(login.Login_check()) {
                         JOptionPane.showMessageDialog(null, "로그인이 되었습니다!", "로그인 확인 여부", JOptionPane.INFORMATION_MESSAGE);
                         vo.setLoginId(login_id);
+                        foodRecordDTO.setUserID(login_id);
                         new MenuTime();
                         dispose();
                     } else {

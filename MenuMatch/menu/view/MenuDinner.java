@@ -4,17 +4,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import menu.controller.AddFood;
 import menu.controller.UserLogin;
 import menu.dto.DinnerDTO;
+import menu.dto.FoodRecordDTO;
 import menu.dto.LoginDTO;
 import menu.controller.DinnerInfo;
+import menu.dto.UserDTO;
 
 public class MenuDinner extends JFrame {
 
     // import
-    DinnerDTO dto = new DinnerDTO();
+    UserDTO vo = new UserDTO();
+    static DinnerDTO dto = new DinnerDTO();
     DinnerInfo dinnerInfo = new DinnerInfo();
+    static FoodRecordDTO foodRecordDTO = new FoodRecordDTO();
+
     int menu_id;
+    String user_name = foodRecordDTO.getUserID();
     String description;
     String name;
 
@@ -269,7 +276,17 @@ public class MenuDinner extends JFrame {
         recordBtn.setIcon(recordBtn_img);
         recordBtn.setContentAreaFilled(false);
         tapPn.add(recordBtn);
+
+        recordBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 버튼이 선택되었을 때 실행할 코드
+                System.out.println("1");
+            }
+        });
+
     }
+
 
     public void RandomBtn() { // 랜덤 메뉴 버튼
         randomBtn.setBounds(1080, 20, 87, 87);
@@ -423,6 +440,18 @@ public class MenuDinner extends JFrame {
         menuSelectBtn.setIcon(menuSelectBtn_img);
         menuSelectBtn.setContentAreaFilled(false);
         menu_descriptionPn.add(menuSelectBtn);
+
+        menuSelectBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddFood addFood = new AddFood();
+                System.out.println("foodRecordDTO : " + foodRecordDTO.getUserID());
+                foodRecordDTO.setMenuName(dto.getMenuName());
+                System.out.println(foodRecordDTO.getMenuName() + " " + foodRecordDTO.getUserID() );
+                addFood.FoodRecordDTO(foodRecordDTO);
+            }
+        });
+
     }
 
     public void MenuRandomXBtn() { // 메뉴 설명 X 버튼 (닫기 버튼과 같음)
