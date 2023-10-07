@@ -77,6 +77,8 @@ public class MenuView extends JFrame{
 
             // 이미지를 패널에 그림
             g.drawImage(image, 0, 0, this);
+
+
         }
     };
 
