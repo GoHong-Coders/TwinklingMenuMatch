@@ -72,6 +72,7 @@ public class MenuDinner extends JFrame {
             g.drawImage(image, 0, 0, this);
 
 
+
             dinnerInfo.DinnerInfo(dto);
             description = dto.getDescription(); // 데이터베이스에서 가져온 값으로 대체
 
