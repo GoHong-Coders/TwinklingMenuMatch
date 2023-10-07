@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class AddRecord {
-
+    private static Boolean record = false;
     public static void FoodRecordDTO(FoodRecordDTO data) {
         try {
             // 데이터베이스 연결 가져오기
@@ -23,6 +23,7 @@ public class AddRecord {
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("선택한 메뉴가 기록되었습니다.");
+                record = true;
             } else {
                 System.out.println("선택한 메뉴가 기록되지 않았습니다.");
             }
@@ -33,6 +34,9 @@ public class AddRecord {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public Boolean record_chek (){
+        return record;
     }
 
 }

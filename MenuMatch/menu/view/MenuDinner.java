@@ -72,6 +72,7 @@ public class MenuDinner extends JFrame {
             g.drawImage(image, 0, 0, this);
 
 
+
             dinnerInfo.DinnerInfo(dto);
             description = dto.getDescription(); // 데이터베이스에서 가져온 값으로 대체
 
@@ -443,10 +444,15 @@ public class MenuDinner extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AddRecord addFood = new AddRecord();
-                System.out.println("foodRecordDTO : " + foodRecordDTO.getUserID());
                 foodRecordDTO.setMenuName(dto.getMenuName());
                 System.out.println(foodRecordDTO.getMenuName() + " " + foodRecordDTO.getUserID() );
                 addFood.FoodRecordDTO(foodRecordDTO);
+                if(addFood.record_chek()) {
+                    JOptionPane.showMessageDialog(null, foodRecordDTO.getMenuName() + " 메뉴가 선택되었습니다!", "메뉴 선택 여부", JOptionPane.INFORMATION_MESSAGE);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, foodRecordDTO.getMenuName() + " 메뉴가 선택되지 않았습니다!", "메뉴 선택 여부", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
