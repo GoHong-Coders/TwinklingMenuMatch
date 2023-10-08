@@ -79,21 +79,20 @@ public class MenuView extends JFrame {
             RecordFoodList recordFoodList = new RecordFoodList();
             List<String> userFoodRecords = recordFoodList.fetchFoodRecords("rei050r");
 
-            int y = 78; // 메뉴 이름의 시작 y 좌표
+            int y = 60; // 메뉴 이름의 시작 y 좌표
             int i = 1;
             for (String menuName : userFoodRecords) {
                 ImageIcon imageIcon = new ImageIcon("imgs/record_label.png");
                 Image image = imageIcon.getImage();
 
                 // 이미지를 패널에 그림
-                g.drawImage(image, 0, y - 20, this); // 이미지를 메뉴 이름 위에 그립니다.
+                g.drawImage(image, 0, y - 56, this);
 
-                // TODO : 이미지 패딩 조절하기
                 g.setColor(Color.BLACK); // 텍스트 색상 설정
-                g.setFont(new Font("Gowun Batang", Font.PLAIN, 20)); // 한글을 지원하는 폰트 사용 예시
-                g.drawString(menuName, 20, y); // 텍스트 그리기
-                g.drawString(String.valueOf(i), 5, y); // 텍스트 그리기
-                y += 80; // 다음 메뉴 이름을 그릴 y 좌표 조정
+                g.setFont(new Font("Gowun Batang", Font.PLAIN, 24));
+                g.drawString(menuName, 100, y); // 텍스트 그리기
+                g.drawString(String.valueOf(i), 38, y); // 텍스트 그리기
+                y += 110; // 다음 메뉴 이름을 그릴 y 좌표 조정
                 System.out.println(menuName);
                 i++;
             }
@@ -281,7 +280,7 @@ public class MenuView extends JFrame {
 
                 menu_RecordPn.setBounds(0, 0, 754, 610);
                 menu_RecordPn.add(recordtextLb);
-                menu_RecordTextPn.setBounds(47, 128, 640, 1000);
+                menu_RecordTextPn.setBounds(47, 128, 640, 1200);
                 recordtextLb.setIcon(recordtext_img);
                 recordtextLb.setVisible(true);
                 recordtextLb.setBounds(33, 20, 267, 55);

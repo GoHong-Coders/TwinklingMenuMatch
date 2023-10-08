@@ -19,7 +19,6 @@ public class MenuDinner extends JFrame {
     static FoodRecordDTO foodRecordDTO = new FoodRecordDTO();
 
     int menu_id;
-    String user_name = foodRecordDTO.getUserID();
     String description;
     String name;
 
