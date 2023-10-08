@@ -1,12 +1,10 @@
 package menu.controller;
 
-import menu.dto.DBConnecter;
-import menu.dto.DinnerDTO;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// 기록 db에서 로그인한 유저가 선택한 메뉴들을 불러오는 클래스
 public class RecordFoodList {
 
     public static List<String> fetchFoodRecords(String userId) {
@@ -40,9 +38,10 @@ public class RecordFoodList {
     }
 
     public static void main(String[] args) {
-        List<String> userFoodRecords = fetchFoodRecords("rei050r");
+//        테스트 코드
+        /* List<String> userFoodRecords = fetchFoodRecords("rei050r");
         for (String menuName : userFoodRecords) {
             System.out.println(menuName);
-        }
+        } */
     }
 }

@@ -1,17 +1,18 @@
 package menu.controller;
 
-import menu.dto.DBConnecter;
+import menu.dto.LoginDTO;
 import menu.dto.UserDTO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import menu.dto.LoginDTO;
-
+// 유저 아이디와 비밀번호를 통해 로그인하는 클래스
 public class UserLogin {
     private static Boolean login_check = false;
     static UserDTO vo = new UserDTO();
+
     public static void Login(LoginDTO data) {
 
         try {
@@ -40,9 +41,11 @@ public class UserLogin {
             e.printStackTrace();
         }
     }
-    public Boolean Login_check (){
+
+    public Boolean Login_check() {
         return login_check;
     }
+
     public static void main(String[] args) {
     }
 }

@@ -1,4 +1,4 @@
-package menu.dto;
+package menu.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

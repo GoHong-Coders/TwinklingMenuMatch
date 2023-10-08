@@ -1,6 +1,5 @@
 package menu.controller;
 
-import menu.dto.DBConnecter;
 import menu.dto.DinnerDTO;
 
 import java.sql.Connection;
@@ -8,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+// 저녁 메뉴 테이블에서 저녁 이름과 설명을 가져오는 클래스
 public class DinnerInfo {
 
     public static void DinnerInfo(DinnerDTO data) {

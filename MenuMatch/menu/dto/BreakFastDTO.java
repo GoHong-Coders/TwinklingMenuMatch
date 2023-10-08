@@ -11,9 +11,7 @@ public class BreakFastDTO {
         Description = description;
     }
 
-    public BreakFastDTO() {
-
-    }
+    public BreakFastDTO() {}
 
     public int getMenuID() {
         return MenuID;
