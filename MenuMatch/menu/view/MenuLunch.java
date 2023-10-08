@@ -1,10 +1,28 @@
 package menu.view;
 
+import menu.controller.AddRecord;
+import menu.controller.DinnerInfo;
+import menu.controller.LunchInfo;
+import menu.dto.DinnerDTO;
+import menu.dto.FoodRecordDTO;
+import menu.dto.LunchDTO;
+import menu.dto.UserDTO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class MenuLunch extends JFrame{
+    // import
+    UserDTO vo = new UserDTO();
+    LunchDTO dto = new LunchDTO();
+    static FoodRecordDTO foodRecordDTO = new FoodRecordDTO();
+    LunchInfo lunchInfo = new LunchInfo();
+
+    int menu_id;
+    String description;
+    String name;
+
     // 프레임
     JFrame menuF = new JFrame("Menu Description"); // 메뉴 설명
     JFrame menu_RandomF = new JFrame("Random Menu"); // 랜덤 메뉴
@@ -32,6 +50,16 @@ public class MenuLunch extends JFrame{
 
             // 이미지를 패널에 그림
             g.drawImage(image, 0, 0, this);
+
+            lunchInfo.LunchInfo(dto);
+            name = dto.getMenuName(); // 데이터베이스에서 가져온 값으로 대체
+
+
+            g.setColor(Color.WHITE); // 텍스트 색상 설정
+            g.setFont(new Font("Gowun Batang", Font.PLAIN, 35));
+            g.drawString(name, 250, 60); // 텍스트 그리기
+
+
         }
     };
     JPanel menu_WindowPn = new JPanel(null){ // 메뉴 설명창
@@ -43,6 +71,14 @@ public class MenuLunch extends JFrame{
 
             // 이미지를 패널에 그림
             g.drawImage(image, 0, 0, this);
+
+            lunchInfo.LunchInfo(dto);
+            description = dto.getDescription();
+
+            g.setColor(Color.BLACK); // 텍스트 색상 설정
+            g.setFont(new Font("Gowun Batang", Font.PLAIN, 20)); // 한글을 지원하는 폰트 사용 예시
+            g.drawString(description, 10, 78); // 텍스트 그리기
+
         }
     };
     JPanel menu_RandomPn = new JPanel(null){ // 랜덤메뉴 선택 패널
@@ -187,6 +223,8 @@ public class MenuLunch extends JFrame{
         int row, col;
         for (row = 0; row < 4; row++) {
             for (col = 0; col < 4; col++) {
+                int finalRow = row;
+                int finalCol = col;
                 buttons[row][col].addMouseListener(new MouseAdapter() { // 마우스 이벤트
                     @Override public void mousePressed(MouseEvent e) { // 마우스 클릭했을때
                         menuF.setVisible(true);
@@ -198,6 +236,11 @@ public class MenuLunch extends JFrame{
                         menu_descriptionPn.add(menu_WindowPn);
                         menu_descriptionPn.setBounds(0,0,670,680);
                         menu_WindowPn.setBounds(50, 80, 560, 400);
+
+                        // 2차원 배열을 숫자로 바꾸기 : finalRow*4 + finalCol +1
+                        System.out.println(finalRow*4 + finalCol + 1);
+                        menu_id = finalRow*4 + finalCol + 1;
+                        dto.setMenuID(menu_id);
 
                         menuF.addWindowListener(new WindowAdapter() {
                             @Override public void windowClosing(WindowEvent e) { // X 누를 시 메뉴 설명 화면이 사라짐
@@ -380,6 +423,22 @@ public class MenuLunch extends JFrame{
         menuSelectBtn.setIcon(menuSelectBtn_img);
         menuSelectBtn.setContentAreaFilled(false);
         menu_descriptionPn.add(menuSelectBtn);
+
+        menuSelectBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddRecord addFood = new AddRecord();
+                foodRecordDTO.setMenuName(dto.getMenuName());
+                System.out.println(foodRecordDTO.getMenuName() + " " + foodRecordDTO.getUserID() );
+                addFood.FoodRecordDTO(foodRecordDTO);
+                if(addFood.record_chek()) {
+                    JOptionPane.showMessageDialog(null, foodRecordDTO.getMenuName() + " 메뉴가 선택되었습니다!", "메뉴 선택 여부", JOptionPane.INFORMATION_MESSAGE);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, foodRecordDTO.getMenuName() + " 메뉴가 선택되지 않았습니다!", "메뉴 선택 여부", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
     public void MenuRandomXBtn(){ // 메뉴 설명 X 버튼 (닫기 버튼과 같음)
