@@ -1,3 +1,5 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+MenuMatch/menu/controller/DBConnecter.java
+MenuMatch/menu/controller/DBTest.java
