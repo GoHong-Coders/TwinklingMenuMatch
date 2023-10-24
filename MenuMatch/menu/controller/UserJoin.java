@@ -1,12 +1,12 @@
 package menu.controller;
-import menu.dto.DBConnecter;
+
+import menu.dto.UserDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import menu.dto.UserDTO;
-
+// 아이디, 이름, 비밀번호를 입력하여 회원 가입하는 클래스
 public class UserJoin {
     static Boolean join_check = false;
 
@@ -42,9 +42,12 @@ public class UserJoin {
             e.printStackTrace();
         }
     }
+
     public Boolean JoinCheck() {
         return join_check;
     }
-    public static void main(String[] args) { }
+
+    public static void main(String[] args) {
+    }
 }
 

@@ -1,12 +1,12 @@
 package menu.controller;
 
-import menu.dto.DBConnecter;
 import menu.dto.FoodRecordDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+// 기록 db에 메뉴를 추가하는 클래스
 public class AddRecord {
     private static Boolean record = false;
     public static void FoodRecordDTO(FoodRecordDTO data) {

@@ -1,22 +1,22 @@
 package menu.controller;
 
-import menu.dto.LunchDTO;
+import menu.dto.BreakFastDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// 점심메뉴 테이블에서 점심 이름과 설명을 가져오는 클래스
-public class LunchInfo {
+// 아침 메뉴 테이블에서 아침 이름과 설명을 가져오는 클래스
+public class BreakFastInfo {
 
-    public static void LunchInfo(LunchDTO data) {
+    public static void BreakFastInfo(BreakFastDTO data) {
         try {
             int menu_id = data.getMenuID(); // 원하는 메뉴 아이디를 설정
 
             // 데이터베이스 연결 가져오기
             Connection connection = DBConnecter.getConnection();
-            String selectQuery = "SELECT * FROM LunchMenu WHERE MENUID = ?";
+            String selectQuery = "SELECT * FROM BreakFastMenu WHERE MENUID = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
 
             preparedStatement.setInt(1, menu_id);
