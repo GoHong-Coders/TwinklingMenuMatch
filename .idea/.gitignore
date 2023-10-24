@@ -3,4 +3,4 @@
 /workspace.xml
 MenuMatch/menu/controller/DBConnecter.java
 MenuMatch/menu/controller/DBTest.java
-out
+out/production/
