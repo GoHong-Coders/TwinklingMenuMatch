@@ -1,27 +1,24 @@
 package menu.view;
 
+import menu.controller.DeleteRecord;
 import menu.controller.RecordFoodList;
+import menu.dto.DeleteRecordDTO;
+import menu.dto.FoodRecordDTO;
+import menu.dto.LoginDTO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class MenuRecord extends JFrame {
 
-    private JFrame menuRecordFrame = new JFrame("Menu Record");
+    static FoodRecordDTO foodRecordDTO = new FoodRecordDTO();
     private JPanel menuRecordPanel = new JPanel(new BorderLayout());
-
     private JScrollPane scrollPane;
-    private JButton deleteButton = new JButton();
-    private JButton closeButton = new JButton();
-    private JButton textCloseButton = new JButton();
-
-    private ImageIcon deleteIcon = new ImageIcon("imgs/delete.png");
-    private ImageIcon closeButtonIcon = new ImageIcon("imgs/x.png");
-    private ImageIcon closeButtonClickedIcon = new ImageIcon("imgs/x_clicked.png");
-
+    private JButton deleteButton;
     private List<String> userFoodRecords;
 
     public MenuRecord() {
@@ -33,7 +30,7 @@ public class MenuRecord extends JFrame {
     }
 
     private void initializeFrame() {
-        setTitle("Menu");
+        setTitle("Menu Record");
         setSize(754, 610);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -43,87 +40,98 @@ public class MenuRecord extends JFrame {
     private void initializeComponents() {
         RecordFoodList recordFoodList = new RecordFoodList();
         userFoodRecords = recordFoodList.fetchFoodRecords("rei050r");
-
-        scrollPane = new JScrollPane(createRecordTextPanel());
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        initializeButton(deleteButton, deleteIcon, 47, 459, 640, 105);
+        deleteButton = createButton("imgs/delete.png", 47, 459, 640, 105);
+        scrollPane = createScrollPane(createRecordTextPanel());
     }
 
+    String CurmenuName = "";
     private JPanel createRecordTextPanel() {
-        JPanel panel = new JPanel(new GridLayout(userFoodRecords.size(), 1));
-        for (int i = 0; i < userFoodRecords.size(); i++) {
-            JPanel recordItemPanel = new JPanel(new BorderLayout());
+        JPanel menuRecordTextPanel = new JPanel(null) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
 
-            // 이미지와 버튼을 포함할 레이블 생성
-            JLabel label = new JLabel();
+                int y = 60; // 메뉴 이름의 시작 y 좌표
+                int i = 1;
 
-            ImageIcon imageIcon = new ImageIcon("imgs/record_label.png");
-            JLabel nameLabel = new JLabel(userFoodRecords.get(i));
-            nameLabel.setFont(new Font("Gowun Batang", Font.PLAIN, 24));
-            JLabel numberLabel = new JLabel(String.valueOf(i + 1));
+                for (String menuName : userFoodRecords) {
+                    ImageIcon imageIcon = new ImageIcon("imgs/record_label.png");
+                    Image image = imageIcon.getImage();
 
-            // 이미지 아이콘 설정
-            label.setIcon(imageIcon);
+                    // 이미지를 패널에 그림
+                    g.drawImage(image, 45, y - 56, this);
 
-            // 이미지 아이콘과 텍스트를 가운데 정렬
-            label.setHorizontalTextPosition(JLabel.CENTER);
-            label.setVerticalTextPosition(JLabel.BOTTOM);
-
-            // 텍스트 라벨 추가
-            label.setText("<html>" + userFoodRecords.get(i) + "<br>" + (i + 1) + "</html");
-
-            // 버튼 추가
-            deleteButton = new JButton();
-            deleteButton.setIcon(closeButtonIcon);
-            deleteButton.setBorderPainted(false); // 테두리 외곽선 없애기
-            deleteButton.setFocusPainted(false); // focus되었을 때 생기는 테두리 없애기
-            deleteButton.setContentAreaFilled(false); // 내용 영역 없애기add(startBtn);
-
-            deleteButton.addActionListener(e -> {
-                // 처리할 삭제 버튼 이벤트를 여기에 추가
-            });
+                    g.setColor(Color.BLACK); // 텍스트 색상 설정
+                    g.setFont(new Font("Gowun Batang", Font.PLAIN, 24));
+                    g.drawString(menuName, 145, y); // 텍스트 그리기
+                    g.drawString(String.valueOf(i), 83, y); // 텍스트 그리기
+                    CurmenuName = menuName;
+                    y += 110; // 다음 메뉴 이름을 그릴 y 좌표 조정
+                    i++;
 
 
-            recordItemPanel.add(label, BorderLayout.CENTER);
-            recordItemPanel.add(deleteButton, BorderLayout.EAST);
-            panel.add(recordItemPanel);
-        }
-        return panel;
+                }
+            }
+        };
+
+        // 패널의 크기를 화면 크기보다 더 크게 설정
+        menuRecordTextPanel.setPreferredSize(new Dimension(700, 700));
+        return menuRecordTextPanel;
     }
 
 
 
-    private void initializeButton(JButton button, ImageIcon icon, int x, int y, int width, int height) {
+    // 이미지를 클릭할 때 호출되는 메서드
+    public void onImageClick(String menuName) {
+        int result = JOptionPane.showConfirmDialog(this, "이 메뉴를 삭제하시겠습니까?", "메뉴 삭제 확인", JOptionPane.YES_NO_OPTION);
+
+        if (result == JOptionPane.YES_OPTION) {
+            // 사용자가 "예"를 선택한 경우, 메뉴 삭제
+            DeleteRecordDTO deleteData = new DeleteRecordDTO();
+            deleteData.setUserId("rei050r"); // 현재 사용자의 ID를 설정
+            deleteData.setMenuName(menuName); // 클릭한 메뉴 이름을 설정
+
+            DeleteRecord deleteRecord = new DeleteRecord();
+            boolean deleteResult = deleteRecord.deleteFoodRecord(deleteData);
+
+            if (deleteResult) {
+                // 삭제 성공 메시지 표시
+                JOptionPane.showMessageDialog(this, "메뉴가 삭제되었습니다.", "삭제 완료", JOptionPane.INFORMATION_MESSAGE);
+                // 다시 UI 업데이트 또는 리프레시 작업을 수행할 수 있음
+            } else {
+                // 삭제 실패 메시지 표시
+                JOptionPane.showMessageDialog(this, "메뉴 삭제에 실패했습니다.", "삭제 실패", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private JButton createButton(String iconPath, int x, int y, int width, int height) {
+        JButton button = new JButton();
         button.setBounds(x, y, width, height);
         button.setBorderPainted(false);
-        button.setIcon(icon);
+        button.setIcon(new ImageIcon(iconPath));
         button.setContentAreaFilled(false);
+        return button;
     }
 
-    private void addCloseButtonListener(JButton closeButton) {
-        closeButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                menuRecordFrame.dispose();
-            }
-        });
+    private JScrollPane createScrollPane(JPanel panel) {
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        return scrollPane;
     }
+
 
     private void addComponentsToPanel() {
-        // "결과 불러오기" 라벨 생성
         JLabel resultLabel = new JLabel("결과 불러오기");
         resultLabel.setFont(new Font("Gowun Batang", Font.PLAIN, 40));
 
-        // 상단 패널에 "결과 불러오기" 라벨 추가
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         topPanel.add(resultLabel);
 
-        // 나머지 구성요소 추가
         menuRecordPanel.add(topPanel, BorderLayout.NORTH);
         menuRecordPanel.add(scrollPane, BorderLayout.CENTER);
         menuRecordPanel.add(deleteButton, BorderLayout.SOUTH);
-
     }
 
     private void addPanelToFrame() {
