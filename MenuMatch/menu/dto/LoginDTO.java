@@ -2,7 +2,7 @@ package menu.dto;
 
 public class LoginDTO {
     // 유저 관련 정보
-    private String login_id;
+    static private String login_id;
     private String login_pass;
 
     // 생성자

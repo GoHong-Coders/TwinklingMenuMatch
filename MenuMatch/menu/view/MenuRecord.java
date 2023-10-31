@@ -6,6 +6,7 @@ import menu.controller.RecordFoodList;
 import menu.dto.AllDeleteRecordDTO;
 import menu.dto.DeleteRecordDTO;
 import menu.dto.FoodRecordDTO;
+import menu.dto.LoginDTO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,7 @@ import java.awt.event.*;
 
 public class MenuRecord extends JFrame {
 
+    static LoginDTO dto = new LoginDTO();
     static FoodRecordDTO foodRecordDTO = new FoodRecordDTO();
     private JPanel menuRecordPanel = new JPanel(new BorderLayout());
     private JPanel menuXPnael = new JPanel(null);
@@ -47,14 +49,12 @@ public class MenuRecord extends JFrame {
     }
 
 
-
-
     private void initializeComponents() {
         RecordFoodList recordFoodList = new RecordFoodList();
-        userFoodRecords = recordFoodList.fetchFoodRecords("rei050r");
+        userFoodRecords = recordFoodList.fetchFoodRecords(dto.getLoginId());
         deleteButton = createButton("imgs/delete.png", 47, 459, 640, 105);
         scrollPane = createScrollPane(createRecordTextPanel());
-        menuXPnael.setBounds(679,31,37,37);
+        menuXPnael.setBounds(679, 31, 37, 37);
 
         deleteButton.addActionListener(new ActionListener() {
             @Override
@@ -64,7 +64,7 @@ public class MenuRecord extends JFrame {
                 if (result == JOptionPane.YES_OPTION) {
                     // 사용자가 "예"를 선택한 경우, 메뉴 삭제
                     AllDeleteRecordDTO allDeleteRecordDTO = new AllDeleteRecordDTO();
-                    allDeleteRecordDTO.setUserId("rei050r"); // 현재 사용자의 ID를 설정
+                    allDeleteRecordDTO.setUserId(dto.getLoginId()); // 현재 사용자의 ID를 설정
 
                     AllDeleteRecord allDeleteRecord = new AllDeleteRecord();
                     boolean deleteResult = allDeleteRecord.deleteFoodRecord(allDeleteRecordDTO);
@@ -83,7 +83,6 @@ public class MenuRecord extends JFrame {
     }
 
 
-
     private JPanel createRecordTextPanel() {
         JPanel menuRecordTextPanel = new JPanel(null);
 
@@ -97,11 +96,11 @@ public class MenuRecord extends JFrame {
             // 텍스트를 JLabel로 설정
             JLabel textLabel = new JLabel(menuName);
             textLabel.setFont(new Font("Gowun Batang", Font.PLAIN, 24));
-            textLabel.setBounds(135, y+30, 200, 30); // 텍스트 크기를 조절
+            textLabel.setBounds(135, y + 30, 200, 30); // 텍스트 크기를 조절
             menuRecordTextPanel.add(textLabel);
 
             JLabel numberLabel = new JLabel(String.valueOf(i));
-            numberLabel.setBounds(85, y+30, 50, 30); // 숫자 텍스트 크기를 조절
+            numberLabel.setBounds(85, y + 30, 50, 30); // 숫자 텍스트 크기를 조절
             menuRecordTextPanel.add(numberLabel);
 
             // 이미지를 JLabel로 설정
@@ -150,6 +149,7 @@ public class MenuRecord extends JFrame {
 
         // 패널의 크기를 설정
         menuRecordTextPanel.setPreferredSize(new Dimension(700, 700));
+        menuRecordTextPanel.setBackground(Color.WHITE);
         return menuRecordTextPanel;
     }
 
@@ -160,7 +160,7 @@ public class MenuRecord extends JFrame {
         if (result == JOptionPane.YES_OPTION) {
             // 사용자가 "예"를 선택한 경우, 메뉴 삭제
             DeleteRecordDTO deleteData = new DeleteRecordDTO();
-            deleteData.setUserId("rei050r"); // 현재 사용자의 ID를 설정
+            deleteData.setUserId(dto.getLoginId()); // 현재 사용자의 ID를 설정
             deleteData.setMenuName(menuName); // 클릭한 메뉴 이름을 설정
 
             System.out.println(menuName);
@@ -200,11 +200,15 @@ public class MenuRecord extends JFrame {
         JLabel resultLabel = new JLabel("결과 불러오기");
         resultLabel.setFont(new Font("Gowun Batang", Font.PLAIN, 40));
 
+        resultLabel.setBackground(Color.WHITE);
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         topPanel.add(resultLabel);
         topPanel.add(menuRecordXBtn);
         // X 버튼을 상단 패널에 추가
         topPanel.add(menuXPnael, BorderLayout.SOUTH);
+
+        topPanel.setBackground(Color.WHITE);
+        menuRecordPanel.setBackground(Color.WHITE);
 
         menuRecordPanel.add(topPanel, BorderLayout.NORTH);
         menuRecordPanel.add(scrollPane, BorderLayout.CENTER);
@@ -228,9 +232,6 @@ public class MenuRecord extends JFrame {
             }
         });
     }
-
-
-
 
 
     private void addPanelToFrame() {
