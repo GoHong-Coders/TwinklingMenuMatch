@@ -273,6 +273,14 @@ public class MenuDinner extends JFrame {
         homeBtn.setIcon(homeBtn_img);
         homeBtn.setContentAreaFilled(false);
         tapPn.add(homeBtn);
+
+        homeBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                new MenuTime();
+                dispose();
+            }
+        });
     }
 
     public void RecordBtn() { // 기록 버튼

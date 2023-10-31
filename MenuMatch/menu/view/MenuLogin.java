@@ -25,7 +25,6 @@ public class MenuLogin extends JFrame {
 
     private Font font = new Font("Gowun Batang", Font.PLAIN, 14); // 폰트 설정
 
-//    MenuJoin e = new MenuJoin();
 
     public MenuLogin() {
         LoginUI();
@@ -43,7 +42,7 @@ public class MenuLogin extends JFrame {
         //createLoweredBevelBorder(): 오목한 스타일의 테두리를 생성.
         Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
         Border loweredBevelBorder = BorderFactory.createLoweredBevelBorder();
-        Border Border = BorderFactory.createCompoundBorder(raisedBevelBorder,loweredBevelBorder);
+        Border Border = BorderFactory.createCompoundBorder(raisedBevelBorder, loweredBevelBorder);
 
         Login_Id_tf.setText("아이디를 입력해주세요");
         Login_Id_tf.setBounds(192, 155, 312, 60);
@@ -163,7 +162,7 @@ public class MenuLogin extends JFrame {
 
                     UserLogin login = new UserLogin();
                     login.Login(vo);
-                    if(login.Login_check()) {
+                    if (login.Login_check()) {
                         JOptionPane.showMessageDialog(null, "로그인이 되었습니다!", "로그인 확인 여부", JOptionPane.INFORMATION_MESSAGE);
                         vo.setLoginId(login_id);
                         foodRecordDTO.setUserID(login_id);
