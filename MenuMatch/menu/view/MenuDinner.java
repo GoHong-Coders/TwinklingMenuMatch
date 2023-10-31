@@ -283,11 +283,10 @@ public class MenuDinner extends JFrame {
         recordBtn.setContentAreaFilled(false);
         tapPn.add(recordBtn);
 
-        recordBtn.addActionListener(new ActionListener() {
+        recordBtn.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                // 버튼이 선택되었을 때 실행할 코드
-                System.out.println("1");
+            public void mouseClicked(MouseEvent e) {
+                new MenuRecord();
             }
         });
 
@@ -527,6 +526,24 @@ public class MenuDinner extends JFrame {
         menuRandomSelectBtn.addMouseListener(new MouseAdapter() {
             @Override public void mousePressed(MouseEvent e) {
                 System.out.println(randomIndex);
+                menuF.setVisible(true);
+                menuF.setSize(670, 680);
+                menuF.setLayout(null);
+                menuF.setLocationRelativeTo(null);
+                menuF.setResizable(false);
+                menuF.add(menu_descriptionPn);
+                menu_descriptionPn.add(menu_WindowPn);
+                menu_descriptionPn.setBounds(0,0,670,680);
+                menu_WindowPn.setBounds(50, 80, 560, 400);
+
+                menu_id = randomIndex+1;
+                dto.setMenuID(menu_id);
+
+                menuF.addWindowListener(new WindowAdapter() {
+                    @Override public void windowClosing(WindowEvent e) { // X 누를 시 메뉴 설명 화면이 사라짐
+                        menuF.dispose();
+                    }
+                });
             }
         });
     }

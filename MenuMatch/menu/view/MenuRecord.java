@@ -1,7 +1,9 @@
 package menu.view;
 
+import menu.controller.AllDeleteRecord;
 import menu.controller.DeleteRecord;
 import menu.controller.RecordFoodList;
+import menu.dto.AllDeleteRecordDTO;
 import menu.dto.DeleteRecordDTO;
 import menu.dto.FoodRecordDTO;
 
@@ -16,18 +18,25 @@ public class MenuRecord extends JFrame {
 
     static FoodRecordDTO foodRecordDTO = new FoodRecordDTO();
     private JPanel menuRecordPanel = new JPanel(new BorderLayout());
+    private JPanel menuXPnael = new JPanel(null);
+
     private JScrollPane scrollPane;
     private JButton deleteButton;
     private List<String> userFoodRecords;
     private Map<Image, String> imageToMenuName = new HashMap<>();
+    JButton menuRecordXBtn = new JButton("");
+    ImageIcon menuXBtn_img = new ImageIcon("imgs/x.png");
+    ImageIcon menuXBtnClick_img = new ImageIcon("imgs/x_clicked.png");
 
     public MenuRecord() {
         initializeFrame();
         initializeComponents();
+        MenuRecordXBtn(); // X 버튼을 먼저 추가
         addComponentsToPanel();
         addPanelToFrame();
         displayFrame();
     }
+
 
     private void initializeFrame() {
         setTitle("Menu Record");
@@ -37,12 +46,43 @@ public class MenuRecord extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+
+
+
     private void initializeComponents() {
         RecordFoodList recordFoodList = new RecordFoodList();
         userFoodRecords = recordFoodList.fetchFoodRecords("rei050r");
         deleteButton = createButton("imgs/delete.png", 47, 459, 640, 105);
         scrollPane = createScrollPane(createRecordTextPanel());
+        menuXPnael.setBounds(679,31,37,37);
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int result = JOptionPane.showConfirmDialog(deleteButton, "이 메뉴를 삭제하시겠습니까?", "메뉴 삭제 확인", JOptionPane.YES_NO_OPTION);
+
+                if (result == JOptionPane.YES_OPTION) {
+                    // 사용자가 "예"를 선택한 경우, 메뉴 삭제
+                    AllDeleteRecordDTO allDeleteRecordDTO = new AllDeleteRecordDTO();
+                    allDeleteRecordDTO.setUserId("rei050r"); // 현재 사용자의 ID를 설정
+
+                    AllDeleteRecord allDeleteRecord = new AllDeleteRecord();
+                    boolean deleteResult = allDeleteRecord.deleteFoodRecord(allDeleteRecordDTO);
+
+                    if (deleteResult) {
+                        // 삭제 성공 메시지 표시
+                        JOptionPane.showMessageDialog(deleteButton, "메뉴가 삭제되었습니다.", "삭제 완료", JOptionPane.INFORMATION_MESSAGE);
+                        // 다시 UI 업데이트 또는 리프레시 작업을 수행할 수 있음
+                    } else {
+                        // 삭제 실패 메시지 표시
+                        JOptionPane.showMessageDialog(deleteButton, "메뉴 삭제에 실패했습니다.", "삭제 실패", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
     }
+
+
 
     private JPanel createRecordTextPanel() {
         JPanel menuRecordTextPanel = new JPanel(null);
@@ -162,11 +202,36 @@ public class MenuRecord extends JFrame {
 
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         topPanel.add(resultLabel);
+        topPanel.add(menuRecordXBtn);
+        // X 버튼을 상단 패널에 추가
+        topPanel.add(menuXPnael, BorderLayout.SOUTH);
 
         menuRecordPanel.add(topPanel, BorderLayout.NORTH);
         menuRecordPanel.add(scrollPane, BorderLayout.CENTER);
         menuRecordPanel.add(deleteButton, BorderLayout.SOUTH);
     }
+
+
+    public void MenuRecordXBtn() { // 메뉴 설명 X 버튼 (닫기 버튼과 같음)
+        menuRecordXBtn.setBounds(700, 31, 37, 37);
+        menuRecordXBtn.setBorderPainted(false);
+        menuRecordXBtn.setRolloverIcon(menuXBtnClick_img);
+        menuRecordXBtn.setIcon(menuXBtn_img);
+        menuRecordXBtn.setContentAreaFilled(false);
+
+        menuXPnael.add(menuRecordXBtn); // X 버튼을 menuXPnael 패널에 추가
+
+        menuRecordXBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                dispose(); // 현재의 JFrame을 닫습니다.
+            }
+        });
+    }
+
+
+
+
 
     private void addPanelToFrame() {
         add(menuRecordPanel);
@@ -179,6 +244,7 @@ public class MenuRecord extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             MenuRecord menuRecord = new MenuRecord();
+            menuRecord.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         });
     }
 }
