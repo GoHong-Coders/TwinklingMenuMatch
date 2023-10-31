@@ -132,6 +132,8 @@ public class MenuLunch extends JFrame{
     private final String[] Menu = {"설렁탕", "백반", "쌀국수", "김밥", "순두부찌개", "돈까스", "파스타",
             "부대찌개", "라멘", "제육볶음", "오므라이스", "햄버거", "토스트", "비빔밥", "불고기", "닭갈비"};
     private boolean spinning;
+    private Random random = new Random();
+    private int randomIndex;
 
     // 이미지 삽입
     ImageIcon homeBtn_img = new ImageIcon("imgs/Home.png");
@@ -484,12 +486,11 @@ public class MenuLunch extends JFrame{
         @Override
         public void run() {
             spinning = true;
-            Random random = new Random();
             int duration = 5000 + random.nextInt(5000); // 스핀 지속 시간 (5-10초)
             long startTime = System.currentTimeMillis();
 
             while (System.currentTimeMillis() - startTime < duration) {
-                int randomIndex = random.nextInt(Menu.length);
+                randomIndex = random.nextInt(Menu.length);
                 menurandomTF.setText(Menu[randomIndex]);
                 try {
                     Thread.sleep(100); // 업데이트 간격 (0.1초)
@@ -503,9 +504,14 @@ public class MenuLunch extends JFrame{
         }
     }
     private void stopRoulette() {
-        Random random = new Random();
-        int randomIndex = random.nextInt(Menu.length);
+        randomIndex = random.nextInt(Menu.length);
         menurandomTF.setText(Menu[randomIndex]);
+
+        menuRandomSelectBtn.addMouseListener(new MouseAdapter() {
+            @Override public void mousePressed(MouseEvent e) {
+                System.out.println(randomIndex);
+            }
+        });
     }
 
     public static void main(String[] args){
