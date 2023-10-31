@@ -1,7 +1,9 @@
 package menu.view;
 
+import menu.controller.AllDeleteRecord;
 import menu.controller.DeleteRecord;
 import menu.controller.RecordFoodList;
+import menu.dto.AllDeleteRecordDTO;
 import menu.dto.DeleteRecordDTO;
 import menu.dto.FoodRecordDTO;
 
@@ -42,6 +44,31 @@ public class MenuRecord extends JFrame {
         userFoodRecords = recordFoodList.fetchFoodRecords("rei050r");
         deleteButton = createButton("imgs/delete.png", 47, 459, 640, 105);
         scrollPane = createScrollPane(createRecordTextPanel());
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int result = JOptionPane.showConfirmDialog(deleteButton, "이 메뉴를 삭제하시겠습니까?", "메뉴 삭제 확인", JOptionPane.YES_NO_OPTION);
+
+                if (result == JOptionPane.YES_OPTION) {
+                    // 사용자가 "예"를 선택한 경우, 메뉴 삭제
+                    AllDeleteRecordDTO allDeleteRecordDTO = new AllDeleteRecordDTO();
+                    allDeleteRecordDTO.setUserId("rei050r"); // 현재 사용자의 ID를 설정
+
+                    AllDeleteRecord allDeleteRecord = new AllDeleteRecord();
+                    boolean deleteResult = allDeleteRecord.deleteFoodRecord(allDeleteRecordDTO);
+
+                    if (deleteResult) {
+                        // 삭제 성공 메시지 표시
+                        JOptionPane.showMessageDialog(deleteButton, "메뉴가 삭제되었습니다.", "삭제 완료", JOptionPane.INFORMATION_MESSAGE);
+                        // 다시 UI 업데이트 또는 리프레시 작업을 수행할 수 있음
+                    } else {
+                        // 삭제 실패 메시지 표시
+                        JOptionPane.showMessageDialog(deleteButton, "메뉴 삭제에 실패했습니다.", "삭제 실패", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
     }
 
     private JPanel createRecordTextPanel() {
