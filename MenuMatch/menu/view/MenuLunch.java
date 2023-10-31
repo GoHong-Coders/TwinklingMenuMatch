@@ -11,6 +11,7 @@ import menu.dto.UserDTO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 public class MenuLunch extends JFrame{
     // import
@@ -125,7 +126,12 @@ public class MenuLunch extends JFrame{
     JLabel recordtextLb = new JLabel("");
 
     // 텍스트 필드
-    JTextField menurandomTF = new JTextField("");
+    JTextField menurandomTF = new JTextField();
+
+    // private (랜덤 기능)
+    private final String[] Menu = {"설렁탕", "백반", "쌀국수", "김밥", "순두부찌개", "돈까스", "파스타",
+            "부대찌개", "라멘", "제육볶음", "오므라이스", "햄버거", "토스트", "비빔밥", "불고기", "닭갈비"};
+    private boolean spinning;
 
     // 이미지 삽입
     ImageIcon homeBtn_img = new ImageIcon("imgs/Home.png");
@@ -465,8 +471,41 @@ public class MenuLunch extends JFrame{
     }
 
     public void MenuRandomTf(){ // 메뉴 랜덤 텍스트필드
+        Thread rouletteThread = new Thread(new RouletteTask());
+        rouletteThread.start();
+
+        menurandomTF.setFont(new Font("SansSerif", Font.BOLD, 20));
+        menurandomTF.setHorizontalAlignment(JTextField.CENTER);
+        menurandomTF.setEditable(false);
         menurandomTF.setBounds(52, 157, 650, 145);
         menu_RandomPn.add(menurandomTF);
+    }
+    private class RouletteTask implements Runnable {
+        @Override
+        public void run() {
+            spinning = true;
+            Random random = new Random();
+            int duration = 5000 + random.nextInt(5000); // 스핀 지속 시간 (5-10초)
+            long startTime = System.currentTimeMillis();
+
+            while (System.currentTimeMillis() - startTime < duration) {
+                int randomIndex = random.nextInt(Menu.length);
+                menurandomTF.setText(Menu[randomIndex]);
+                try {
+                    Thread.sleep(100); // 업데이트 간격 (0.1초)
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            spinning = false;
+            stopRoulette();
+        }
+    }
+    private void stopRoulette() {
+        Random random = new Random();
+        int randomIndex = random.nextInt(Menu.length);
+        menurandomTF.setText(Menu[randomIndex]);
     }
 
     public static void main(String[] args){
