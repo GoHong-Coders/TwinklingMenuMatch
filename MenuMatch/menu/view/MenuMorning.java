@@ -10,6 +10,7 @@ import menu.dto.UserDTO;
 
 import java.util.*;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -206,6 +207,7 @@ public class MenuMorning extends JFrame{
 
         tapPn.setPreferredSize(new Dimension(500, tapPn_height));
         menuPn.setPreferredSize(new Dimension(500, menuPn_height));
+        menuPn.setBackground(Color.WHITE);
 
         // 패널 추가
         add(tapPn);
@@ -317,6 +319,10 @@ public class MenuMorning extends JFrame{
                 randomtextLb.setIcon(randomtext_img);
                 randomtextLb.setVisible(true);
                 randomtextLb.setBounds(250, 20, 270, 50);
+
+                menu_RandomF.setBackground(Color.WHITE);
+                menu_RandomPn.setBackground(Color.WHITE);
+                randomtextLb.setBackground(Color.WHITE);
 
                 menu_RandomF.addWindowListener(new WindowAdapter() {
                     @Override public void windowClosing(WindowEvent e) { // X 누를 시 메뉴 설명 화면이 사라짐
@@ -493,13 +499,19 @@ public class MenuMorning extends JFrame{
         menurandomTF.setHorizontalAlignment(JTextField.CENTER);
         menurandomTF.setEditable(false);
         menurandomTF.setBounds(52, 157, 650, 145);
+        menurandomTF.setBackground(Color.WHITE);
+        // 사용자 정의 테두리 스타일 및 색상 설정
+        Border customBorder = BorderFactory.createLineBorder(Color.decode("#C9AEAE"), 2, true); // 색상, 두께, 라운딩 여부
+
+        menurandomTF.setBorder(customBorder);
+
         menu_RandomPn.add(menurandomTF);
     }
     private class RouletteTask implements Runnable {
         @Override
         public void run() {
             spinning = true;
-            int duration = 5000 + random.nextInt(5000); // 스핀 지속 시간 (5-10초)
+            int duration = 2000 + random.nextInt(5000); // 스핀 지속 시간 (5-10초)
             long startTime = System.currentTimeMillis();
 
             while (System.currentTimeMillis() - startTime < duration) {

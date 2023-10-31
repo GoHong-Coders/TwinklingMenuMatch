@@ -149,6 +149,7 @@ public class MenuRecord extends JFrame {
 
         // 패널의 크기를 설정
         menuRecordTextPanel.setPreferredSize(new Dimension(700, 700));
+        menuRecordTextPanel.setBackground(Color.WHITE);
         return menuRecordTextPanel;
     }
 
@@ -199,11 +200,15 @@ public class MenuRecord extends JFrame {
         JLabel resultLabel = new JLabel("결과 불러오기");
         resultLabel.setFont(new Font("Gowun Batang", Font.PLAIN, 40));
 
+        resultLabel.setBackground(Color.WHITE);
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         topPanel.add(resultLabel);
         topPanel.add(menuRecordXBtn);
         // X 버튼을 상단 패널에 추가
         topPanel.add(menuXPnael, BorderLayout.SOUTH);
+
+        topPanel.setBackground(Color.WHITE);
+        menuRecordPanel.setBackground(Color.WHITE);
 
         menuRecordPanel.add(topPanel, BorderLayout.NORTH);
         menuRecordPanel.add(scrollPane, BorderLayout.CENTER);
