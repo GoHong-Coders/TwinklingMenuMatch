@@ -4,14 +4,13 @@ import menu.controller.DeleteRecord;
 import menu.controller.RecordFoodList;
 import menu.dto.DeleteRecordDTO;
 import menu.dto.FoodRecordDTO;
-import menu.dto.LoginDTO;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.awt.event.*;
 
 public class MenuRecord extends JFrame {
 
@@ -20,6 +19,7 @@ public class MenuRecord extends JFrame {
     private JScrollPane scrollPane;
     private JButton deleteButton;
     private List<String> userFoodRecords;
+    private Map<Image, String> imageToMenuName = new HashMap<>();
 
     public MenuRecord() {
         initializeFrame();
@@ -44,42 +44,74 @@ public class MenuRecord extends JFrame {
         scrollPane = createScrollPane(createRecordTextPanel());
     }
 
-    String CurmenuName = "";
     private JPanel createRecordTextPanel() {
-        JPanel menuRecordTextPanel = new JPanel(null) {
+        JPanel menuRecordTextPanel = new JPanel(null);
+
+        int y = 40;
+        int i = 1;
+
+        for (String menuName : userFoodRecords) {
+            ImageIcon imageIcon = new ImageIcon("imgs/record_label.png");
+            Image image = imageIcon.getImage();
+
+            // 텍스트를 JLabel로 설정
+            JLabel textLabel = new JLabel(menuName);
+            textLabel.setFont(new Font("Gowun Batang", Font.PLAIN, 24));
+            textLabel.setBounds(135, y+30, 200, 30); // 텍스트 크기를 조절
+            menuRecordTextPanel.add(textLabel);
+
+            JLabel numberLabel = new JLabel(String.valueOf(i));
+            numberLabel.setBounds(85, y+30, 50, 30); // 숫자 텍스트 크기를 조절
+            menuRecordTextPanel.add(numberLabel);
+
+            // 이미지를 JLabel로 설정
+            JLabel imageLabel = new JLabel(imageIcon);
+            imageLabel.setBounds(45, y, imageIcon.getIconWidth(), imageIcon.getIconHeight());
+            menuRecordTextPanel.add(imageLabel);
+
+            // 이미지와 menuName을 연결
+            imageToMenuName.put(image, menuName);
+
+            y += 110;
+            i++;
+        }
+
+        // 이미지 클릭 이벤트 처리
+        menuRecordTextPanel.addMouseListener(new MouseListener() {
             @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
+            public void mouseClicked(MouseEvent e) {
+                Component component = menuRecordTextPanel.getComponentAt(e.getPoint());
+                if (component instanceof JLabel) {
+                    Image clickedImage = ((ImageIcon) ((JLabel) component).getIcon()).getImage();
+                    String menuName = imageToMenuName.get(clickedImage);
 
-                int y = 60; // 메뉴 이름의 시작 y 좌표
-                int i = 1;
-
-                for (String menuName : userFoodRecords) {
-                    ImageIcon imageIcon = new ImageIcon("imgs/record_label.png");
-                    Image image = imageIcon.getImage();
-
-                    // 이미지를 패널에 그림
-                    g.drawImage(image, 45, y - 56, this);
-
-                    g.setColor(Color.BLACK); // 텍스트 색상 설정
-                    g.setFont(new Font("Gowun Batang", Font.PLAIN, 24));
-                    g.drawString(menuName, 145, y); // 텍스트 그리기
-                    g.drawString(String.valueOf(i), 83, y); // 텍스트 그리기
-                    CurmenuName = menuName;
-                    y += 110; // 다음 메뉴 이름을 그릴 y 좌표 조정
-                    i++;
-
-
+                    if (menuName != null) {
+                        onImageClick(menuName);
+                    }
                 }
             }
-        };
 
-        // 패널의 크기를 화면 크기보다 더 크게 설정
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+
+        // 패널의 크기를 설정
         menuRecordTextPanel.setPreferredSize(new Dimension(700, 700));
         return menuRecordTextPanel;
     }
-
-
 
     // 이미지를 클릭할 때 호출되는 메서드
     public void onImageClick(String menuName) {
@@ -91,6 +123,7 @@ public class MenuRecord extends JFrame {
             deleteData.setUserId("rei050r"); // 현재 사용자의 ID를 설정
             deleteData.setMenuName(menuName); // 클릭한 메뉴 이름을 설정
 
+            System.out.println(menuName);
             DeleteRecord deleteRecord = new DeleteRecord();
             boolean deleteResult = deleteRecord.deleteFoodRecord(deleteData);
 
@@ -104,6 +137,7 @@ public class MenuRecord extends JFrame {
             }
         }
     }
+
 
     private JButton createButton(String iconPath, int x, int y, int width, int height) {
         JButton button = new JButton();
