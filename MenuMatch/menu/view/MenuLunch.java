@@ -59,8 +59,11 @@ public class MenuLunch extends JFrame{
 
             g.setColor(Color.WHITE); // 텍스트 색상 설정
             g.setFont(new Font("Gowun Batang", Font.PLAIN, 35));
-            g.drawString(name, 250, 60); // 텍스트 그리기
 
+            FontMetrics fm = g.getFontMetrics();
+            int x = (getWidth() - fm.stringWidth(name)) / 2;
+
+            g.drawString(name, x, 60); // 가운데 정렬된 텍스트 그리기
 
         }
     };
@@ -79,8 +82,18 @@ public class MenuLunch extends JFrame{
 
             g.setColor(Color.BLACK); // 텍스트 색상 설정
             g.setFont(new Font("Gowun Batang", Font.PLAIN, 20)); // 한글을 지원하는 폰트 사용 예시
-            g.drawString(description, 10, 78); // 텍스트 그리기
+            FontMetrics fm = g.getFontMetrics();
+            int lineHeight = fm.getHeight(); // 한 행의 높이
 
+            String[] lines = description.split("\n"); // 줄바꿈 문자를 기준으로 텍스트를 나눔
+
+            int y = ((getHeight() - (lines.length * lineHeight)) / 2) + fm.getAscent();
+
+            for (String line : lines) {
+                int x = (getWidth() - fm.stringWidth(line)) / 2;
+                g.drawString(line, x, y);
+                y += lineHeight;
+            }
         }
     };
     JPanel menu_RandomPn = new JPanel(null){ // 랜덤메뉴 선택 패널
