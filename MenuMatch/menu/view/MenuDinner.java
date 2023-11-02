@@ -14,15 +14,17 @@ import menu.dto.UserDTO;
 
 public class MenuDinner extends JFrame {
 
-    // import
+    // 변수
     UserDTO vo = new UserDTO();
-    static DinnerDTO dto = new DinnerDTO();
     DinnerInfo dinnerInfo = new DinnerInfo();
+
+    static DinnerDTO dto = new DinnerDTO();
     static FoodRecordDTO foodRecordDTO = new FoodRecordDTO();
 
-    int menu_id;
+
     String description;
     String name;
+    int menu_id;
 
     // 프레임
     JFrame menuF = new JFrame("Menu Description"); // 메뉴 설명

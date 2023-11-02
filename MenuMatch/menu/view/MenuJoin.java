@@ -12,17 +12,17 @@ public class MenuJoin extends JFrame {
     // 패널 만들기
     private JPanel panel;
 
-
     // 텍스트 필드 만들기
     private JTextField Join_Id_tf;
     private JTextField Join_name_tf;
     private JPasswordField Join_pass_tf;
     private JPasswordField Join_retry_tf;
 
-    //버튼만들기
+    // 버튼만들기
     private JButton joinBtn;
     private JButton cancelBtn;
 
+    // 변수
     private String user_id;
     private String user_name;
     private String user_pass;

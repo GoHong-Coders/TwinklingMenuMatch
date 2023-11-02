@@ -13,7 +13,6 @@ public class MenuLogin extends JFrame {
     static LoginDTO vo = new LoginDTO();
     static FoodRecordDTO foodRecordDTO = new FoodRecordDTO();
 
-
     private JPanel panel;
     private JTextField Login_Id_tf;
     private JPasswordField Login_pass_tf;
