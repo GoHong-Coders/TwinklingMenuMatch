@@ -40,7 +40,8 @@ public class MenuTime extends JFrame {
     private void addTimeLabel() {
         tTimeLb = new JLabel();
         tTimeLb.setFont(new Font("Arial", Font.PLAIN, 45));
-        tTimeLb.setBounds(540, 82, 150, 58);
+        tTimeLb.setBounds(528, 85, 150, 58);
+        tTimeLb.setHorizontalAlignment(JLabel.CENTER); // 텍스트를 가운데 정렬로 설정
         updateTimeLabel();
 
         // 1초마다 현재 시간 업데이트
@@ -50,6 +51,7 @@ public class MenuTime extends JFrame {
 
         timePl.add(tTimeLb);
     }
+
 
     // 현재 시각을 나타내는 함수
     private void updateTimeLabel() {
