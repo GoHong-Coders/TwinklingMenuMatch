@@ -525,14 +525,14 @@ public class MenuMorning extends JFrame{
         @Override
         public void run() {
             spinning = true;
-            int duration = 2000 + random.nextInt(5000); // 스핀 지속 시간 (5-10초)
+            int duration = 5000 + random.nextInt(5000); // 스핀 지속 시간 (5-10초)
             long startTime = System.currentTimeMillis();
 
             while (System.currentTimeMillis() - startTime < duration) {
                 randomIndex = random.nextInt(Menu.length);
                 menurandomTF.setText(Menu[randomIndex]);
                 try {
-                    Thread.sleep(100); // 업데이트 간격 (0.1초)
+                    Thread.sleep(150); // 업데이트 간격 (0.1초)
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

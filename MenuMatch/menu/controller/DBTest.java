@@ -7,11 +7,12 @@ import java.sql.SQLException;
 public class DBTest {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        String jdbcUrl = "jdbc:oracle:thin:@ye0-0eun:1521:XE"; // Oracle 데이터베이스 URL
+        String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE"; // Oracle 데이터베이스 URL
         String user = "system"; // 데이터베이스 사용자 이름
         String password = "1234"; // 데이터베이스 비밀번호
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Class.forName("oracle.jdbc.OracleDriver");
+
         Connection conn=DriverManager.getConnection(
                 jdbcUrl,user,password);
         //url,id,password

@@ -59,7 +59,7 @@ public class MenuRecord extends JFrame {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int result = JOptionPane.showConfirmDialog(deleteButton, "이 메뉴를 삭제하시겠습니까?", "메뉴 삭제 확인", JOptionPane.YES_NO_OPTION);
+                int result = JOptionPane.showConfirmDialog(deleteButton, "모든 메뉴를 삭제하시겠습니까?", "모든 메뉴 삭제 확인", JOptionPane.YES_NO_OPTION);
 
                 if (result == JOptionPane.YES_OPTION) {
                     // 사용자가 "예"를 선택한 경우, 메뉴 삭제

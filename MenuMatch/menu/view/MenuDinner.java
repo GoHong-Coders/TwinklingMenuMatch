@@ -296,7 +296,7 @@ public class MenuDinner extends JFrame {
         homeBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                new MenuTime();
+                new MenuStart();
                 dispose();
             }
         });
@@ -541,14 +541,14 @@ public class MenuDinner extends JFrame {
         @Override
         public void run() {
             spinning = true;
-            int duration = 2000 + random.nextInt(5000); // 스핀 지속 시간 (5-7초)
+            int duration = 5000 + random.nextInt(5000); // 스핀 지속 시간 (5-7초)
             long startTime = System.currentTimeMillis();
 
             while (System.currentTimeMillis() - startTime < duration) {
                 randomIndex = random.nextInt(Menu.length);
                 menurandomTF.setText(Menu[randomIndex]);
                 try {
-                    Thread.sleep(100); // 업데이트 간격 (0.1초)
+                    Thread.sleep(150); // 업데이트 간격 (0.1초)
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
